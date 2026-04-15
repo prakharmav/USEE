@@ -1,0 +1,2 @@
+// Controller functions go here.
+// Keep business logic thin — delegate heavy lifting to services.
