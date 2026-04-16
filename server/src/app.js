@@ -29,10 +29,11 @@ app.get('/', (_req, res) => {
 });
 
 // ── API Routes ────────────────────────────────────────────────────────────────
-// import authRouter   from './routes/auth.js';
-// import userRouter   from './routes/user.js';
-// app.use('/api/auth', authLimiter, authRouter);
-// app.use('/api/users', userRouter);
+import authRouter   from './routes/auth.js';
+import userRouter   from './routes/user.js';
+// Using general limiter for auth right now or define authLimiter if you want
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
 
 // ── 404 Handler ───────────────────────────────────────────────────────────────
 app.use((_req, res) => {
