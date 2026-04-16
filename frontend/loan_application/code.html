@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eduvion Horizon - Loan Application</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c4c6cf",
+                    "primary-fixed": "#d5e3ff",
+                    "on-tertiary-fixed": "#002019",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#006f63",
+                    "tertiary-fixed": "#5ffbd6",
+                    "tertiary": "#00261e",
+                    "surface-container-low": "#f4f3f7",
+                    "secondary-fixed-dim": "#59dbc7",
+                    "on-secondary-fixed": "#00201c",
+                    "secondary-container": "#76f4e0",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dad9dd",
+                    "on-surface-variant": "#43474e",
+                    "surface-container-highest": "#e3e2e6",
+                    "surface-bright": "#faf9fd",
+                    "primary-container": "#043669",
+                    "surface-container-high": "#e9e7eb",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001b3c",
+                    "inverse-surface": "#2f3033",
+                    "surface": "#faf9fd",
+                    "on-secondary-fixed-variant": "#005047",
+                    "on-tertiary-fixed-variant": "#005142",
+                    "outline": "#74777f",
+                    "surface-container": "#efedf1",
+                    "on-tertiary-container": "#00b395",
+                    "secondary": "#006b5f",
+                    "background": "#faf9fd",
+                    "tertiary-fixed-dim": "#38debb",
+                    "inverse-on-surface": "#f1f0f4",
+                    "on-primary-fixed-variant": "#1f477b",
+                    "tertiary-container": "#003e32",
+                    "surface-tint": "#3a5f94",
+                    "on-primary-container": "#7ca0d9",
+                    "secondary-fixed": "#79f7e3",
+                    "on-background": "#1a1c1e",
+                    "on-surface": "#1a1c1e",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#002045",
+                    "inverse-primary": "#a7c8ff",
+                    "surface-variant": "#e3e2e6",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-[#faf9fd] dark:bg-slate-950 flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img alt="Student Profile Photo" class="w-full h-full object-cover" data-alt="close-up portrait of a young male student smiling confidently against a soft academic library background with warm bokeh lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_volml-LSYB5dQdUbBqKua_qzYcEOwXjzRdgrmC-x2sSiGNtku9e6PeOMuVGYz_D2p4MeSa-fqDbDPxPjeC6u8gMb6uFw7vxBl3jpO2mV9BWDc1KfpFtgclTKEyTvrnDRW3kDIjEWP00Prn7_ikuO5wAW7aVFa_E_Q7n_U3419tJbxfgSawR-jYRTV1zS4EOkcdj7umZNJZSJAW2Zf7AVTuc_kE09O0LdH7lm8mj9Rp4ino0hoa2ZEtqpe1fy_8puvXjwKUTQz6Wj"/>
+</div>
+<span class="text-xl font-extrabold text-[#002045] dark:text-white font-headline tracking-tight">The Digital Curator</span>
+</div>
+<button class="text-[#002045] dark:text-blue-100 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="max-w-5xl mx-auto px-6 pt-8 pb-32">
+<!-- Editorial Header -->
+<div class="mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full font-label">LOAN APPLICATION</span>
+<div class="h-px flex-grow bg-outline-variant opacity-20"></div>
+</div>
+<h1 class="text-4xl md:text-5xl font-headline font-extrabold text-primary tracking-tight leading-none mb-4">Securing your future path.</h1>
+<p class="text-on-surface-variant max-w-xl">Our intelligent curator simplifies your financial journey. Follow the steps to finalize your documentation.</p>
+</div>
+<!-- Step Indicator -->
+<div class="flex gap-4 mb-12 overflow-x-auto pb-4 scrollbar-hide">
+<div class="flex-none flex items-center gap-3 pr-8 opacity-40">
+<span class="w-8 h-8 rounded-full border border-primary flex items-center justify-center font-headline font-bold text-sm">01</span>
+<span class="font-headline font-bold whitespace-nowrap">Personal Details</span>
+</div>
+<div class="flex-none flex items-center gap-3 pr-8">
+<span class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-headline font-bold text-sm">02</span>
+<span class="font-headline font-bold whitespace-nowrap text-primary">Document Verification</span>
+</div>
+<div class="flex-none flex items-center gap-3 pr-8 opacity-40">
+<span class="w-8 h-8 rounded-full border border-primary flex items-center justify-center font-headline font-bold text-sm">03</span>
+<span class="font-headline font-bold whitespace-nowrap">Goal Alignment</span>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Step 2: Main Section -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Upload Zone Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_32px_rgba(26,28,30,0.06)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-secondary opacity-20 text-6xl" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<h2 class="text-2xl font-headline font-bold text-primary mb-6">Identity Documents</h2>
+<!-- Drag and Drop Zone -->
+<div class="border-2 border-dashed border-outline-variant/30 rounded-xl bg-surface-container-low p-12 text-center transition-colors hover:bg-surface-container-high group cursor-pointer">
+<div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="upload_file">upload_file</span>
+</div>
+<p class="font-headline font-bold text-on-surface mb-1">Drag and drop your files here</p>
+<p class="text-sm text-on-surface-variant mb-6">Support for PDF, JPG, or PNG (Max 10MB)</p>
+<button class="px-6 py-3 bg-primary text-white font-headline font-bold rounded-xl transition-all hover:shadow-lg active:scale-95">
+                            Browse Local Files
+                        </button>
+</div>
+<!-- File Previews / Progress -->
+<div class="mt-8 space-y-4">
+<!-- Passport Scan Preview -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-outline-variant/20 bg-surface-container-low">
+<div class="w-16 h-12 rounded-lg overflow-hidden bg-white shadow-sm flex-none">
+<img alt="Passport Scan Preview" class="w-full h-full object-cover" data-alt="close-up of a blue passport document laying on a clean white surface with sharp details and professional soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDumKaHoxhiVjJQxRFN_2WZxnY645Zr7NB5KqkeNiZBcWtUDsU49eP546LQ4lVt4RytiKRzaGgS0ElSUqAl-0RaZjj9Yz5DIJzdcKSE_tiiZ4Q8H9Z_smaNh_0-Gx2fxj9tDOQLjsWa5175SEIo6gkjsoBkt0kPTrsDjE9ZBpKMDjWEdC1GDvN9tzyO9_VDRtgJgLYdr5QdRs2zVksWzXbt5_sadfLr1DWfQsv9Qn4YdOrs_zpR2q214e0gLNWoEWG23E1Lo7FPY2wC"/>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-end mb-1">
+<span class="font-headline font-bold text-sm truncate">Passport_International_2024.pdf</span>
+<span class="text-xs font-bold text-secondary">Verified</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="w-full h-full bg-secondary"></div>
+</div>
+</div>
+<button class="flex-none text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+<!-- Current Uploading File -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-outline-variant/20 bg-surface-container-low">
+<div class="w-16 h-12 rounded-lg bg-primary-fixed flex items-center justify-center flex-none">
+<span class="material-symbols-outlined text-primary" data-icon="description">description</span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-end mb-1">
+<span class="font-headline font-bold text-sm truncate">Admission_Letter_Horizon.pdf</span>
+<span class="text-xs font-bold text-primary">82%</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="w-[82%] h-full bg-gradient-to-r from-primary to-primary-container"></div>
+</div>
+</div>
+<button class="flex-none text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Step 3 Teaser -->
+<div class="bg-primary text-white rounded-xl p-8 relative overflow-hidden">
+<div class="absolute -right-12 -bottom-12 w-64 h-64 bg-secondary-container rounded-full opacity-10 blur-3xl"></div>
+<div class="flex items-start justify-between mb-6">
+<div>
+<span class="text-secondary-container text-xs font-bold tracking-widest font-label">NEXT STEP: PREVIEW</span>
+<h3 class="text-2xl font-headline font-bold mt-1">AI-Assisted Statement of Purpose</h3>
+</div>
+<div class="bg-secondary-container/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-secondary-container" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+<p class="text-on-primary-container mb-6 opacity-90">Craft a compelling narrative for your loan application. Our AI helps translate your academic dreams into financial viability.</p>
+<div class="space-y-4">
+<div class="bg-primary-container/40 rounded-xl p-4 border border-white/10">
+<textarea class="w-full bg-transparent border-none text-white placeholder-white/40 focus:ring-0 resize-none h-24 font-body leading-relaxed" disabled="" placeholder="Describe your study goals...">I am planning to pursue a Master's in Data Science at the Technical University of Munich. My focus is on sustainable AI applications for urban development...</textarea>
+<div class="flex justify-end mt-4">
+<button class="flex items-center gap-2 px-5 py-2 bg-secondary-container text-on-secondary-container font-headline font-bold rounded-lg shadow-xl hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[18px]" data-icon="magic_button">magic_button</span>
+                                    Draft with AI
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Guidance & Support -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Why this step matters -->
+<div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-secondary">
+<h4 class="font-headline font-bold text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified_user">verified_user</span>
+                        Secure Curation
+                    </h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        We use 256-bit encryption to ensure your sensitive documents are handled with the highest level of academic and financial security.
+                    </p>
+</div>
+<!-- Academic Advisor Bento -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img alt="Advisor" class="w-full h-full object-cover" data-alt="portrait of a professional female education consultant with glasses in a modern bright office space, soft focus workspace background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJKxL9AYek6vFngntac5Gyig73TXYkle9Q-md8tKdkFLcBlw-ZDLNH_20uo4KTGi9iV522zUVhiJl3CTRZfu8MBjCLaLYMxJx779RsaydtbuXM_TfT1KE3XmLPUv_ceUsqB7DJim6hL4rnh35Rcmjhn3HZ0eRkABIKymV1gNVI5wEoPBsTmNhutw0ZHN0a8Gy-sZdqa-Nw3qczRIzYtg4JE7r4rBMawrRwwJ8GSKdBlspfNmm6Mwb1X2Og4nuufQN5K1W81OvZUl2S"/>
+</div>
+<div>
+<p class="font-headline font-bold text-primary leading-tight">Sarah Chen</p>
+<p class="text-xs text-on-surface-variant">Senior Curator</p>
+</div>
+</div>
+<p class="text-sm text-on-surface italic mb-4">"Ensure your passport scan is clearly visible without any flash glare to speed up the automated verification."</p>
+<button class="w-full py-3 bg-surface-container-high text-primary font-headline font-bold rounded-xl hover:bg-surface-container-highest transition-colors">
+                        Live Chat Support
+                    </button>
+</div>
+<!-- Progress Bento -->
+<div class="bg-surface-container-high rounded-xl p-6">
+<div class="flex justify-between items-center mb-4">
+<span class="font-headline font-bold text-primary">Application Health</span>
+<span class="text-primary font-bold text-xl">64%</span>
+</div>
+<div class="w-full h-2 bg-white rounded-full overflow-hidden mb-6">
+<div class="w-[64%] h-full bg-primary"></div>
+</div>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-sm font-medium text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Personal Data
+                        </li>
+<li class="flex items-center gap-3 text-sm font-medium text-on-surface">
+<span class="material-symbols-outlined text-[18px]" data-icon="pending">pending</span>
+                            Documents
+                        </li>
+<li class="flex items-center gap-3 text-sm font-medium text-on-surface-variant opacity-50">
+<span class="material-symbols-outlined text-[18px]" data-icon="circle">circle</span>
+                            Purpose Statement
+                        </li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Navigation Actions -->
+<div class="mt-12 pt-8 flex justify-between items-center border-t border-outline-variant/10">
+<button class="flex items-center gap-2 px-8 py-4 text-primary font-headline font-bold rounded-xl hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                Previous Step
+            </button>
+<button class="flex items-center gap-2 px-10 py-4 bg-primary text-white font-headline font-bold rounded-xl shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                Continue
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl shadow-[0_-12px_32px_rgba(26,28,30,0.06)] rounded-t-[1.5rem] md:hidden">
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 p-2" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Journey</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#002045] text-white rounded-2xl px-4 py-1.5" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Offers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 p-2" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Badges</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 p-2" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Profile</span>
+</a>
+</nav>
+</body></html>

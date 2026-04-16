@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eduvion Horizon | AI Advisor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#005142",
+                    "secondary-fixed-dim": "#59dbc7",
+                    "on-background": "#1a1c1e",
+                    "secondary": "#006b5f",
+                    "on-primary-fixed-variant": "#1f477b",
+                    "inverse-primary": "#a7c8ff",
+                    "on-surface": "#1a1c1e",
+                    "on-secondary-fixed-variant": "#005047",
+                    "on-secondary-container": "#006f63",
+                    "inverse-surface": "#2f3033",
+                    "on-primary-container": "#7ca0d9",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c4c6cf",
+                    "primary-fixed": "#d5e3ff",
+                    "on-tertiary-fixed": "#002019",
+                    "tertiary-fixed": "#5ffbd6",
+                    "surface": "#faf9fd",
+                    "surface-bright": "#faf9fd",
+                    "on-surface-variant": "#43474e",
+                    "surface-container-highest": "#e3e2e6",
+                    "primary": "#002045",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#00201c",
+                    "surface-variant": "#e3e2e6",
+                    "surface-container": "#efedf1",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#043669",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "background": "#faf9fd",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f4f3f7",
+                    "surface-container-high": "#e9e7eb",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#79f7e3",
+                    "secondary-container": "#76f4e0",
+                    "surface-dim": "#dad9dd",
+                    "tertiary-fixed-dim": "#38debb",
+                    "inverse-on-surface": "#f1f0f4",
+                    "tertiary": "#00261e",
+                    "outline": "#74777f",
+                    "tertiary-container": "#003e32",
+                    "on-primary-fixed": "#001b3c",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#00b395",
+                    "surface-tint": "#3a5f94",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .message-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .message-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .message-scrollbar::-webkit-scrollbar-thumb {
+            background: #e3e2e6;
+            border-radius: 10px;
+        }
+        .glass-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body overflow-hidden h-screen flex">
+<!-- NavigationDrawer (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full z-40 flex flex-col h-screen w-80 bg-slate-100 dark:bg-slate-900 font-manrope font-medium text-sm transition-all duration-300 ease-in-out shadow-2xl dark:shadow-none hidden md:flex">
+<!-- Header -->
+<div class="p-6 flex items-center space-x-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="close up professional portrait of a young asian male student smiling with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANRjzWF3D0UGBeqXS_4-vKh-CHODdC7NxnBpEnbiX9Ws-SUEvJse8suNqLt3uWyFbSWjA5o6Ie8O1a6iePDritpIpkNpsfmmOZp4nCTzjwglgRqX-fU2igtyJVgQUiYceBrC424SsqCbGSw0j3h3uUJCX1sNXYasj1t8CjBjIS1Eprw_vNubo2mV47swcmBUNN12SGOyOPKFUkc5IKusUFV-vt-ri8kdac3nTZ28-dK35WebUFwWwKFx8qPhCg719JgfSQjIzwsu_X"/>
+<div>
+<h3 class="text-blue-900 dark:text-blue-50 text-lg font-black leading-tight">Alex Chen</h3>
+<p class="text-slate-500 text-xs">Intelligent Voyager</p>
+<span class="text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full mt-1 inline-block">Premium Member</span>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="mt-4 px-4 flex-1">
+<div class="space-y-2">
+<p class="text-[10px] uppercase tracking-widest text-slate-400 px-4 mb-2">Advisors</p>
+<a class="flex items-center space-x-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:text-blue-900 hover:bg-white/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span>Career Advisor</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:text-blue-900 hover:bg-white/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Loan Advisor</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 text-slate-600 dark:text-slate-400 mx-2 hover:text-blue-900 hover:bg-white/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Visa Guide</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 rounded-xl mx-2 shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span>General Chat</span>
+</a>
+</div>
+<!-- Session History -->
+<div class="mt-10 space-y-2">
+<p class="text-[10px] uppercase tracking-widest text-slate-400 px-4 mb-2">History</p>
+<div class="px-4 py-2 text-xs text-slate-400 font-bold uppercase tracking-wider">Today</div>
+<button class="w-full text-left flex items-center space-x-3 px-4 py-2 hover:bg-white/50 transition-all rounded-xl text-slate-600 text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span class="truncate">GRE preparation timeline...</span>
+</button>
+<button class="w-full text-left flex items-center space-x-3 px-4 py-2 hover:bg-white/50 transition-all rounded-xl text-slate-600 text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span class="truncate">MIT tuition fee structure</span>
+</button>
+<div class="px-4 py-2 text-xs text-slate-400 font-bold uppercase tracking-wider mt-4">Yesterday</div>
+<button class="w-full text-left flex items-center space-x-3 px-4 py-2 hover:bg-white/50 transition-all rounded-xl text-slate-600 text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span class="truncate">Visa interview tips</span>
+</button>
+</div>
+</nav>
+<!-- Brand Footer -->
+<div class="p-6">
+<div class="text-lg font-black text-blue-900 dark:text-blue-50">Eduvion Horizon</div>
+</div>
+</aside>
+<!-- Main Chat Canvas -->
+<main class="flex-1 flex flex-col relative h-full bg-surface-container-low md:ml-80">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-6 py-3 bg-slate-50 dark:bg-slate-950 text-blue-900 dark:text-blue-200 font-manrope text-sm tracking-tight docked full-width top-0 z-30 transition-colors">
+<div class="flex items-center space-x-4">
+<button class="md:hidden p-2 hover:bg-slate-200/50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-xl font-bold text-blue-900 dark:text-blue-100">Eduvion Horizon</div>
+</div>
+<!-- Mobile Toggle / Desktop Active Context -->
+<div class="hidden md:flex items-center space-x-2 text-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-bold text-teal-600">General Chat Active</span>
+</div>
+<div class="flex items-center space-x-3">
+<button class="material-symbols-outlined p-2 hover:bg-slate-200/50 rounded-full transition-all" data-icon="search">search</button>
+<img class="w-8 h-8 rounded-full border-2 border-white shadow-sm" data-alt="thumbnail avatar of a young professional student with glasses on a soft blue background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFzK9LCZCh-OouCTikJr9inzkw1PePL4hmNKCpTH_PEiLaMHbFemxBUJd-dM9_6b5N08eKa8axFen7iQAUBsoBGEBjdoMCi60CN6cIOrSAmaGrHBSMIZl5IIgPVBlgxSN5nVxMxV10skdvkHUh99NR7efTb7aY2GqkbwpVc565ci2edeaUhoI75RfMZmXfUId5CZGBItTu0jc1Uu-2IWqP3LbaINKz69_5GTiRfD1NiqcKNUUPKC1Zh9fmVSVrCf4pCKY99NmTG-a_"/>
+</div>
+</header>
+<!-- Persistent Chat Type Pills -->
+<div class="flex justify-center space-x-3 py-4 bg-surface/80 glass-blur sticky top-0 z-20">
+<button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-primary text-on-primary transition-all scale-100 hover:scale-105">General Chat</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-surface-container-highest text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all">Career Advisor</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-surface-container-highest text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all">Loan Advisor</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-semibold bg-surface-container-highest text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all">Visa Guide</button>
+</div>
+<!-- Chat Area -->
+<div class="flex-1 overflow-y-auto message-scrollbar px-6 md:px-24 py-8 space-y-8 flex flex-col">
+<!-- AI Message -->
+<div class="flex items-start space-x-4 max-w-3xl animate-in fade-in slide-in-from-left duration-500">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-white text-xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-white p-5 rounded-2xl rounded-tl-none shadow-sm text-sm leading-relaxed border border-outline-variant/10">
+<p class="text-on-surface">Hello Alex! I am your <strong>Eduvion Horizon</strong> concierge. Whether you're looking for the perfect university in Boston or calculating your student loan ROI, I'm here to curate your journey. How can we elevate your education today?</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-start flex-row-reverse space-x-reverse space-x-4 max-w-3xl self-end animate-in fade-in slide-in-from-right duration-500">
+<div class="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-white text-xl" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div class="bg-primary-container p-5 rounded-2xl rounded-tr-none shadow-sm text-sm text-white leading-relaxed">
+<p>I'm interested in applying to MIT for a Master's in Data Science. What are the typical GRE requirements and is there a specific scholarship for international students from Asia?</p>
+</div>
+</div>
+<!-- AI Message (Streaming State) -->
+<div class="flex items-start space-x-4 max-w-3xl">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-white text-xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-white p-5 rounded-2xl rounded-tl-none shadow-sm text-sm leading-relaxed border border-outline-variant/10 w-full">
+<div class="flex items-center space-x-1 mb-2">
+<span class="text-xs font-bold text-secondary uppercase tracking-widest">Eduvion Analysis</span>
+</div>
+<div class="space-y-3">
+<div class="h-4 bg-slate-100 rounded w-full overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent translate-x-[-100%] animate-[shimmer_2s_infinite]"></div>
+</div>
+<div class="h-4 bg-slate-100 rounded w-5/6 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent translate-x-[-100%] animate-[shimmer_2s_infinite]"></div>
+</div>
+<div class="h-4 bg-slate-100 rounded w-4/6 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent translate-x-[-100%] animate-[shimmer_2s_infinite]"></div>
+</div>
+</div>
+<div class="mt-4 flex items-center text-secondary">
+<span class="w-1.5 h-4 bg-secondary rounded-full animate-pulse mr-2"></span>
+<span class="text-xs italic">Consulting academic database...</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area Wrapper -->
+<div class="px-6 md:px-24 pb-8 pt-4 bg-gradient-to-t from-surface to-transparent">
+<!-- Suggestion Chips -->
+<div class="flex flex-wrap gap-2 mb-4 justify-center">
+<button class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-medium border border-transparent hover:border-secondary transition-all">What GRE score do I need for MIT?</button>
+<button class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-medium border border-transparent hover:border-secondary transition-all">How much loan can I get?</button>
+<button class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-medium border border-transparent hover:border-secondary transition-all">Visa interview dates in Shanghai</button>
+</div>
+<!-- Main Input -->
+<div class="relative bg-surface-container-lowest rounded-2xl shadow-xl shadow-primary/5 p-2 border border-outline-variant/20 flex flex-col group">
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-sm p-4 h-24 resize-none placeholder-slate-400 font-body" maxlength="500" placeholder="Ask anything about your global education journey..."></textarea>
+<div class="flex items-center justify-between px-4 pb-2">
+<div class="flex items-center space-x-2">
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors text-xl" data-icon="attachment">attachment</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors text-xl" data-icon="mic">mic</button>
+<span class="text-[10px] text-slate-300 ml-4 font-medium">42 / 500</span>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary p-3 rounded-xl hover:scale-105 transition-all active:scale-95 shadow-md flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+<p class="text-center text-[10px] text-slate-400 mt-4 uppercase tracking-widest font-bold">Powered by Eduvion Intelligence • v2.4.0</p>
+</div>
+</main>
+<!-- BottomNavBar (Shared Component - Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-8 pb-6 pt-4 md:hidden bg-white/60 dark:bg-slate-900/60 backdrop-blur-md rounded-t-3xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<button class="text-slate-400 dark:text-slate-500 p-3 hover:scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<button class="bg-blue-900 dark:bg-blue-200 text-white dark:text-blue-900 rounded-full p-3 hover:scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</button>
+<button class="text-slate-400 dark:text-slate-500 p-3 hover:scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+</button>
+<button class="text-slate-400 dark:text-slate-500 p-3 hover:scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</nav>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 -z-10 w-1/3 h-1/3 bg-primary-container/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-0 left-80 -z-10 w-1/4 h-1/4 bg-secondary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
+<style>
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</body></html>

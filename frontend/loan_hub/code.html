@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Loan Hub | The Digital Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c4c6cf",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary-fixed": "#002019",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#006f63",
+                        "tertiary-fixed": "#5ffbd6",
+                        "tertiary": "#00261e",
+                        "surface-container-low": "#f4f3f7",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "on-secondary-fixed": "#00201c",
+                        "secondary-container": "#76f4e0",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dad9dd",
+                        "on-surface-variant": "#43474e",
+                        "surface-container-highest": "#e3e2e6",
+                        "surface-bright": "#faf9fd",
+                        "primary-container": "#043669",
+                        "surface-container-high": "#e9e7eb",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001b3c",
+                        "inverse-surface": "#2f3033",
+                        "surface": "#faf9fd",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-tertiary-fixed-variant": "#005142",
+                        "outline": "#74777f",
+                        "surface-container": "#efedf1",
+                        "on-tertiary-container": "#00b395",
+                        "secondary": "#006b5f",
+                        "background": "#faf9fd",
+                        "tertiary-fixed-dim": "#38debb",
+                        "inverse-on-surface": "#f1f0f4",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "tertiary-container": "#003e32",
+                        "surface-tint": "#3a5f94",
+                        "on-primary-container": "#7ca0d9",
+                        "secondary-fixed": "#79f7e3",
+                        "on-background": "#1a1c1e",
+                        "on-surface": "#1a1c1e",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#002045",
+                        "inverse-primary": "#a7c8ff",
+                        "surface-variant": "#e3e2e6",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #002045 0%, #043669 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#faf9fd] dark:bg-slate-950 flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<img alt="Student Profile Photo" class="w-10 h-10 rounded-full bg-surface-container-high" data-alt="Close up portrait of a smiling international student in a modern bright campus setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3VaXefiW7DGs6bLH2805jUXY6yTPOF7_9_Oc-mVqwhnbqOgeIku_k_3IoQIKk26CWoxu2eOxpm5K5jWPgmfNL3UyniQQek9uxSvnh9zDLiAcasir4oueO8Wfq2KdIfMn3impqoVnHMKwbbYHTs4_rV1MRAZRQigatvlb6DtjrxnTP2V6yK5KZqjN4iHK7ODOgQZQdewkXTLl-uRVKzIOPAspuj-VLpsHsR9ullbINdnOuD7orqr9aX5ibX3zY5cwuIAcMzffthW8L"/>
+<h1 class="text-xl font-extrabold text-[#002045] dark:text-white font-['Manrope'] tracking-tight">The Digital Curator</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-slate-500 hover:opacity-80 transition-opacity font-semibold" href="#">Journey</a>
+<a class="text-[#006b5f] hover:opacity-80 transition-opacity font-semibold" href="#">Offers</a>
+<a class="text-slate-500 hover:opacity-80 transition-opacity font-semibold" href="#">Badges</a>
+<a class="text-slate-500 hover:opacity-80 transition-opacity font-semibold" href="#">Profile</a>
+</nav>
+<button class="text-[#002045] dark:text-blue-100 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 pt-8 space-y-12">
+<!-- Loan Journey Progress Bar -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-2xl font-bold tracking-tight text-primary">Application Track</h2>
+<p class="text-on-surface-variant body-md">Real-time status of your financial journey.</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Active</span>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl">
+<div class="relative flex justify-between">
+<!-- Progress Line Background -->
+<div class="absolute top-5 left-0 w-full h-1 bg-surface-container-highest rounded-full"></div>
+<!-- Active Progress Line -->
+<div class="absolute top-5 left-0 w-1/2 h-1 editorial-gradient rounded-full"></div>
+<!-- Stages -->
+<div class="relative flex flex-col items-center gap-3 z-10">
+<div class="w-10 h-10 rounded-full editorial-gradient flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="text-xs font-bold text-primary">Applied</span>
+</div>
+<div class="relative flex flex-col items-center gap-3 z-10">
+<div class="w-10 h-10 rounded-full editorial-gradient flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="text-xs font-bold text-primary">Verified</span>
+</div>
+<div class="relative flex flex-col items-center gap-3 z-10">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest border-4 border-primary flex items-center justify-center text-primary shadow-sm">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<span class="text-xs font-bold text-primary">Approved</span>
+</div>
+<div class="relative flex flex-col items-center gap-3 z-10">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-sm">payments</span>
+</div>
+<span class="text-xs font-semibold text-outline">Disbursed</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Hero: Eligibility & Featured -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+<!-- Eligibility Card -->
+<div class="lg:col-span-7 editorial-gradient rounded-xl p-10 text-white relative overflow-hidden flex flex-col justify-between min-h-[400px]">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary opacity-20 blur-[100px] -mr-20 -mt-20"></div>
+<div class="relative z-10 space-y-4 max-w-md">
+<span class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+                        AI-Powered Analysis
+                    </span>
+<h2 class="text-4xl font-extrabold tracking-tight leading-tight">Check your pre-approved limit in 2 minutes.</h2>
+<p class="text-primary-fixed opacity-90 text-lg">Our curator analyzes 20+ NBFCs to find the perfect fit for your academic profile.</p>
+</div>
+<div class="relative z-10 pt-8">
+<button class="bg-secondary-fixed text-on-secondary-fixed px-8 py-4 rounded-xl font-bold text-lg shadow-[0_12px_32px_rgba(26,28,30,0.15)] hover:scale-105 transition-transform">
+                        Check Eligibility Now
+                    </button>
+</div>
+<div class="absolute bottom-4 right-8 opacity-10 text-8xl font-black select-none">LOAN HUB</div>
+</div>
+<!-- Side Card: Quick Insight -->
+<div class="lg:col-span-5 bg-surface-container-low rounded-xl p-8 flex flex-col justify-center gap-6 border border-white/50">
+<div class="space-y-2">
+<h3 class="text-xl font-bold text-primary">Market Pulse</h3>
+<p class="text-on-surface-variant body-md">Global interest rates are currently favorable for STEM programs in the USA and Germany.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-lg shadow-sm">
+<div class="p-3 bg-secondary-container rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="trending_down">trending_down</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-outline">Lowest Rate</p>
+<p class="text-lg font-bold text-primary">8.45% p.a.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-lg shadow-sm">
+<div class="p-3 bg-primary-fixed rounded-lg text-on-primary-fixed">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-outline">Avg. Approval</p>
+<p class="text-lg font-bold text-primary">48 Hours</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Offers Grid -->
+<section class="space-y-8">
+<div class="flex items-baseline gap-4">
+<h2 class="text-2xl font-bold tracking-tight text-primary">Curated Loan Packages</h2>
+<div class="h-px flex-1 bg-surface-container-high"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Conservative -->
+<div class="group bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between transition-all hover:shadow-[0_12px_32px_rgba(26,28,30,0.06)] border-b-4 border-transparent hover:border-secondary">
+<div class="space-y-6">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary text-4xl">shield_moon</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Conservative</span>
+</div>
+<div class="space-y-2">
+<h3 class="text-xl font-bold text-primary">Secure Scholar</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Prioritizes low interest rates and long repayment windows for peace of mind.</p>
+</div>
+<div class="pt-4 space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-outline">Interest Rate</span>
+<span class="font-bold text-on-surface">8.45% - 9.2%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-outline">Max Tenure</span>
+<span class="font-bold text-on-surface">15 Years</span>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full py-3 bg-surface-container-high text-primary font-bold rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">Select Plan</button>
+</div>
+<!-- Balanced -->
+<div class="group bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between transition-all hover:shadow-[0_12px_32px_rgba(26,28,30,0.06)] border-b-4 border-transparent hover:border-secondary relative">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Most Popular</div>
+<div class="space-y-6">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary text-4xl">balance</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Balanced</span>
+</div>
+<div class="space-y-2">
+<h3 class="text-xl font-bold text-primary">Horizon Standard</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Optimal mix of quick processing and competitive interest rates.</p>
+</div>
+<div class="pt-4 space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-outline">Interest Rate</span>
+<span class="font-bold text-on-surface">9.5% - 10.5%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-outline">Max Tenure</span>
+<span class="font-bold text-on-surface">10 Years</span>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full py-3 bg-primary text-white font-bold rounded-lg">Select Plan</button>
+</div>
+<!-- Aggressive -->
+<div class="group bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between transition-all hover:shadow-[0_12px_32px_rgba(26,28,30,0.06)] border-b-4 border-transparent hover:border-secondary">
+<div class="space-y-6">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary text-4xl">rocket_launch</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline">Aggressive</span>
+</div>
+<div class="space-y-2">
+<h3 class="text-xl font-bold text-primary">Global FastTrack</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">High disbursement amounts with minimal collateral requirements.</p>
+</div>
+<div class="pt-4 space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-outline">Interest Rate</span>
+<span class="font-bold text-on-surface">11.2% - 12.8%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-outline">Max Tenure</span>
+<span class="font-bold text-on-surface">7 Years</span>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full py-3 bg-surface-container-high text-primary font-bold rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">Select Plan</button>
+</div>
+</div>
+</section>
+<!-- NBFC Comparison Table -->
+<section class="space-y-8 overflow-hidden">
+<h2 class="text-2xl font-bold tracking-tight text-primary">Compare Lenders</h2>
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/15 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-8 py-5 text-sm font-bold text-primary">NBFC Partner</th>
+<th class="px-8 py-5 text-sm font-bold text-primary">Interest Rate</th>
+<th class="px-8 py-5 text-sm font-bold text-primary">Processing Fee</th>
+<th class="px-8 py-5 text-sm font-bold text-primary">Disbursement Time</th>
+<th class="px-8 py-5 text-sm font-bold text-primary">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center font-bold text-primary text-xs">EF</div>
+<span class="font-semibold text-primary">EduFinance Corp</span>
+</div>
+</td>
+<td class="px-8 py-6 font-medium text-on-surface">8.45% p.a. onwards</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm">0.5% + Taxes</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm">3-5 Working Days</td>
+<td class="px-8 py-6">
+<a class="text-secondary font-bold text-sm hover:underline" href="#">View Details</a>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">GL</div>
+<span class="font-semibold text-primary">Global Lend</span>
+</div>
+</td>
+<td class="px-8 py-6 font-medium text-on-surface">9.10% p.a. onwards</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm">NIL (Promotional)</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm">48 Hours</td>
+<td class="px-8 py-6">
+<a class="text-secondary font-bold text-sm hover:underline" href="#">View Details</a>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-tertiary-fixed-dim flex items-center justify-center font-bold text-on-tertiary-fixed text-xs">SA</div>
+<span class="font-semibold text-primary">Scholar Asset</span>
+</div>
+</td>
+<td class="px-8 py-6 font-medium text-on-surface">8.85% p.a. onwards</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm">1.0% Flat</td>
+<td class="px-8 py-6 text-on-surface-variant text-sm">7 Working Days</td>
+<td class="px-8 py-6">
+<a class="text-secondary font-bold text-sm hover:underline" href="#">View Details</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Help Section (Asymmetric Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-12">
+<div class="relative rounded-xl overflow-hidden group h-64">
+<img alt="Expert Consultation" class="w-full h-full object-cover" data-alt="A professional financial advisor discussing loan documents with a young student in a modern glass office with warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWRNiRx2EBq_TPxlvsR7zdoSZfLMwVTgUpXhUzCA2H2yulA3gg-N8ZPIelmapbdJ8m1TGpzD2ks9wA5GLONnYCReWEaLZNO9JGCTcStzCmVE4uIhhaYlzYUZabgGuz_fhBMQ01vdZwGfjIjsNBY2BDlnM-gqewH1OLYcFJb_EWXukQxPwkMRwLyophFymMPGRJxHd1vqchOyimQvfPlR6d3DOVe6hob7ovG4GC4WbLHl2W0XORUonWp4Cya48kNOKcXaOCS7sLqcs_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-8 text-white">
+<h4 class="text-xl font-bold">Talk to a Loan Specialist</h4>
+<p class="text-primary-fixed text-sm">Get personalized advice for your specific country destination.</p>
+</div>
+</div>
+<div class="bg-secondary-container rounded-xl p-8 flex flex-col justify-between">
+<div class="space-y-4">
+<h4 class="text-xl font-bold text-on-secondary-container">Document Vault</h4>
+<p class="text-on-secondary-container/80 text-sm leading-relaxed">Your secure space for KYC and academic transcripts. All files are encrypted and shared only with your chosen lenders.</p>
+</div>
+<div class="flex gap-4 mt-6">
+<button class="bg-on-secondary-container text-white px-6 py-2 rounded-lg font-bold text-sm">Open Vault</button>
+<button class="border border-on-secondary-container/20 text-on-secondary-container px-6 py-2 rounded-lg font-bold text-sm">Upload New</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl md:hidden shadow-[0_-12px_32px_rgba(26,28,30,0.06)] rounded-t-[1.5rem]">
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Journey</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#002045] text-white rounded-2xl px-4 py-1.5 transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="payments" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Offers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Badges</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

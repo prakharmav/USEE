@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - Eduvion Horizon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c4c6cf",
+                    "primary-fixed": "#d5e3ff",
+                    "on-tertiary-fixed": "#002019",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#006f63",
+                    "tertiary-fixed": "#5ffbd6",
+                    "tertiary": "#00261e",
+                    "surface-container-low": "#f4f3f7",
+                    "secondary-fixed-dim": "#59dbc7",
+                    "on-secondary-fixed": "#00201c",
+                    "secondary-container": "#76f4e0",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#dad9dd",
+                    "on-surface-variant": "#43474e",
+                    "surface-container-highest": "#e3e2e6",
+                    "surface-bright": "#faf9fd",
+                    "primary-container": "#043669",
+                    "surface-container-high": "#e9e7eb",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001b3c",
+                    "inverse-surface": "#2f3033",
+                    "surface": "#faf9fd",
+                    "on-secondary-fixed-variant": "#005047",
+                    "on-tertiary-fixed-variant": "#005142",
+                    "outline": "#74777f",
+                    "surface-container": "#efedf1",
+                    "on-tertiary-container": "#00b395",
+                    "secondary": "#006b5f",
+                    "background": "#faf9fd",
+                    "tertiary-fixed-dim": "#38debb",
+                    "inverse-on-surface": "#f1f0f4",
+                    "on-primary-fixed-variant": "#1f477b",
+                    "tertiary-container": "#003e32",
+                    "surface-tint": "#3a5f94",
+                    "on-primary-container": "#7ca0d9",
+                    "secondary-fixed": "#79f7e3",
+                    "on-background": "#1a1c1e",
+                    "on-surface": "#1a1c1e",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#002045",
+                    "inverse-primary": "#a7c8ff",
+                    "surface-variant": "#e3e2e6",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-[#faf9fd] dark:bg-slate-950 flex justify-between items-center w-full px-6 py-4 docked full-width top-0 sticky z-50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary-fixed">
+<img alt="Student Profile Photo" class="w-full h-full object-cover" data-alt="Close-up portrait of a diverse, smiling university student with natural lighting and soft blurred campus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7aYP63sd5ePG74KzM5eK9l2Bfqg8w_YlX-H3n333OBcL6vRET_4sXDiPSlZNO-M6ASlYzlOME4Lpr018gyKP3yGBsrL6nFzIGkImgEOekzJ4OCSSwlFrMsEEg0DZneq-Uq78Vds_YD6GjPbEpoePX6BIQrkAXtx8dLOqJFI_AhElHE3ExoYqg_1bXEZpYu-MGE8snWKDuUemT49dVkPNZWaLS95SCd2Azqd0ZT77VTfHUiDdXpnQe3B26-LfbbByrEcBVAAcQYKlA"/>
+</div>
+<h1 class="text-xl font-extrabold text-[#002045] dark:text-white font-['Manrope'] tracking-tight">The Digital Curator</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity text-[#002045] dark:text-blue-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Left: Edit Profile Form (Bento Style) -->
+<div class="md:col-span-8 space-y-8">
+<section class="bg-surface-container-low rounded-xl p-8">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-headline font-bold text-primary tracking-tight">Account Intelligence</h2>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Active Journey</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Personal Info -->
+<div class="space-y-4">
+<label class="block">
+<span class="text-sm font-semibold text-on-surface-variant ml-1">Full Name</span>
+<input class="mt-1 block w-full rounded-xl bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 focus:ring-primary/20 focus:bg-white transition-all p-3 text-on-surface" type="text" value="Alexander Thorne"/>
+</label>
+<label class="block">
+<span class="text-sm font-semibold text-on-surface-variant ml-1">Email Address</span>
+<input class="mt-1 block w-full rounded-xl bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 focus:ring-primary/20 focus:bg-white transition-all p-3 text-on-surface" type="email" value="a.thorne@edu-curator.io"/>
+</label>
+</div>
+<!-- Destination Info -->
+<div class="space-y-4">
+<label class="block">
+<span class="text-sm font-semibold text-on-surface-variant ml-1">Target Country</span>
+<select class="mt-1 block w-full rounded-xl bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 focus:ring-primary/20 focus:bg-white transition-all p-3 text-on-surface appearance-none">
+<option>United Kingdom</option>
+<option>Canada</option>
+<option>Australia</option>
+<option>Germany</option>
+</select>
+</label>
+<label class="block">
+<span class="text-sm font-semibold text-on-surface-variant ml-1">Journey Stage</span>
+<select class="mt-1 block w-full rounded-xl bg-surface-container-lowest border-0 ring-1 ring-outline-variant/15 focus:ring-primary/20 focus:bg-white transition-all p-3 text-on-surface appearance-none">
+<option>Researching Programs</option>
+<option>Preparing Documents</option>
+<option selected="">Application Sent</option>
+<option>Visa Process</option>
+</select>
+</label>
+</div>
+</div>
+</section>
+<!-- Notifications Section -->
+<section class="bg-surface-container-low rounded-xl p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl" data-icon="settings_suggest">settings_suggest</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-primary mb-6">Dispatch Preferences</h3>
+<div class="space-y-4">
+<!-- Notification Toggle 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Email Updates</p>
+<p class="text-xs text-on-surface-variant">Weekly curated program matches</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<!-- Notification Toggle 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Push Notifications</p>
+<p class="text-xs text-on-surface-variant">Instant application status alerts</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<!-- Notification Toggle 3 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="sms">sms</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">SMS Alerts</p>
+<p class="text-xs text-on-surface-variant">Urgent visa and deadline reminders</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-3 rounded-xl font-bold tracking-tight hover:opacity-90 transition-all">
+                        Update Discovery Profile
+                    </button>
+</div>
+</section>
+</div>
+<!-- Right: Gamification Widget (Organic Editorialism) -->
+<aside class="md:col-span-4 space-y-6">
+<div class="bg-primary text-white rounded-xl p-8 relative overflow-hidden shadow-2xl">
+<!-- Background decorative element -->
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-secondary/20 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-8">
+<div>
+<p class="text-primary-fixed/60 font-bold uppercase tracking-widest text-[10px]">Curation Rank</p>
+<h4 class="text-3xl font-headline font-extrabold">1,250 <span class="text-sm font-normal text-primary-fixed">pts</span></h4>
+</div>
+<div class="bg-white/10 p-3 rounded-2xl flex flex-col items-center">
+<span class="material-symbols-outlined text-orange-400" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-sm font-bold">5 Days</span>
+</div>
+</div>
+<div class="mb-8">
+<div class="flex justify-between text-xs mb-2 font-bold text-primary-fixed">
+<span>Level 4 Voyager</span>
+<span>80% to Master</span>
+</div>
+<div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full w-[80%] rounded-full shadow-[0_0_12px_rgba(121,247,227,0.4)]"></div>
+</div>
+</div>
+<div>
+<p class="text-primary-fixed/60 font-bold uppercase tracking-widest text-[10px] mb-4">Earned Artifacts</p>
+<div class="grid grid-cols-3 gap-3">
+<div class="aspect-square rounded-xl bg-white/5 flex items-center justify-center group hover:bg-white/10 transition-colors cursor-help" title="Early Bird Applier">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl" data-icon="military_tech">military_tech</span>
+</div>
+<div class="aspect-square rounded-xl bg-white/5 flex items-center justify-center group hover:bg-white/10 transition-colors cursor-help" title="World Traveler">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl" data-icon="public">public</span>
+</div>
+<div class="aspect-square rounded-xl bg-white/5 flex items-center justify-center group hover:bg-white/10 transition-colors cursor-help" title="Scholar Candidate">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl" data-icon="auto_stories">auto_stories</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Tip Card -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10">
+<div class="flex items-start gap-4">
+<div class="p-2 rounded-lg bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-xl" data-icon="lightbulb">lightbulb</span>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-1">Curator's Tip</h5>
+<p class="text-sm text-on-surface-variant leading-relaxed">Students who complete their 'Journey Stage' selector get 15% more personalized program matches in their weekly digest.</p>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl shadow-[0_-12px_32px_rgba(26,28,30,0.06)] rounded-t-[1.5rem]">
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Journey</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Offers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl px-4 py-1.5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Badges</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#002045] text-white rounded-2xl px-4 py-1.5 transition-all scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold mt-1">Profile</span>
+</a>
+</nav>
+<!-- Map/Background Accents -->
+<div class="fixed top-0 left-0 -z-10 opacity-[0.03] pointer-events-none">
+<img alt="Abstract map patterns" data-alt="Subtle, minimalist vector map lines of a major global city with organic flowing streets and waterways" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwVPYn_ii82-xObJA07myUchCXXjKwtWZ4Jx7tq7D35eRsR9jTmeq25DVsGlLH1bux1OtW3IPVgbTYueDxb5eT-UF61fpxVv44gQjDpghVn7Ixq01_YvT4gl164Kk7vh2yQ0OYTjsPyqfNpViB2JLQWHQcHXNbRdqS5TaDc_mxtriuEGb3DgxIrlil1hJW_fx8a2EICVmCoSt28mmlsvR_IA_mTOOm8ntnWd9h_7RNsDlAZyM6VZXvHGPrMSmdnMEaGxpVjbfziWGR"/>
+</div>
+</body></html>

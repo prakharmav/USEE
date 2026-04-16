@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eduvion AI - Essay Helper</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#faf9fd",
+                        "on-primary-container": "#7ca0d9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#43474e",
+                        "outline": "#74777f",
+                        "surface-bright": "#faf9fd",
+                        "on-tertiary-fixed": "#002019",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1a1c1e",
+                        "secondary": "#006b5f",
+                        "outline-variant": "#c4c6cf",
+                        "tertiary-fixed": "#5ffbd6",
+                        "inverse-primary": "#a7c8ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf9fd",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1e",
+                        "tertiary-container": "#003e32",
+                        "tertiary": "#00261e",
+                        "surface-container-highest": "#e3e2e6",
+                        "surface-container-low": "#f4f3f7",
+                        "surface-container": "#efedf1",
+                        "on-tertiary-container": "#00b395",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#79f7e3",
+                        "primary": "#002045",
+                        "surface-variant": "#e3e2e6",
+                        "on-tertiary-fixed-variant": "#005142",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "primary-fixed": "#d5e3ff",
+                        "tertiary-fixed-dim": "#38debb",
+                        "on-primary-fixed": "#001b3c",
+                        "surface-tint": "#3a5f94",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "on-secondary-fixed-variant": "#005047",
+                        "inverse-on-surface": "#f1f0f4",
+                        "surface-dim": "#dad9dd",
+                        "on-secondary-container": "#006f63",
+                        "surface-container-high": "#e9e7eb",
+                        "secondary-container": "#76f4e0",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#043669",
+                        "on-secondary-fixed": "#00201c",
+                        "inverse-surface": "#2f3033"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-bg {
+            background-color: #faf9fd;
+        }
+        .glass-overlay {
+            background: rgba(250, 249, 253, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen">
+<!-- TopAppBar from Shared Components -->
+<header class="fixed top-0 w-full z-50 bg-[#faf9fd]/60 dark:bg-[#1a1c1e]/60 backdrop-blur-xl shadow-sm dark:shadow-none flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#002045] dark:text-[#f4f3f7] hover:bg-[#f4f3f7] p-2 rounded-full transition-colors" data-icon="menu">menu</button>
+<h1 class="font-['Manrope'] font-black tracking-tight text-xl text-[#002045] dark:text-[#f4f3f7]">Eduvion AI</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 mr-6">
+<span class="text-[#44474e] dark:text-[#c4c6cf] font-medium text-sm">Career Guidance</span>
+<span class="text-[#44474e] dark:text-[#c4c6cf] font-medium text-sm">Loan Assistance</span>
+<span class="text-[#006b5f] dark:text-[#76f4e0] font-bold text-sm">Visa Support</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User profile avatar" data-alt="close-up portrait of a young professional student with a warm smile against a neutral soft-focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk7Q6PM3mhDrzammy-Y7wXPdWgpN_p2XdJRcnv5p_0ChZ_PhPuUSZPi-4Q_QUUAAhiGpO8InwHGzCsliQBzFb6jIexlq5_mBqwF_YE8YypYUe9l6xKd93s_m57B-hdlR46lR7ETPfSlF5vWl2B5T8bbckcbJcrb4pf21N-eXD4D2uuBN4X7Ox5getM8jS5TTglU4BVKqhUpeZau6YrQnwV-hkE0Aw1WiiWqDwWR9xmBmwXIykOoekv-dmqmlZgbDB0_bQ8Kwu6-Mre"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-32 px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Background Editorial Element -->
+<div class="md:col-span-12 lg:col-span-5 space-y-6">
+<h2 class="font-headline text-5xl md:text-6xl font-extrabold text-primary leading-tight tracking-tight">
+                Craft Your <span class="text-secondary">Future</span> Story.
+            </h2>
+<p class="text-on-surface-variant text-lg max-w-md leading-relaxed">
+                The Statement of Purpose is more than a document; it's your legacy in the making. Use our Intelligent Voyager AI to structure your narrative with precision.
+            </p>
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="modern library interior with soft sunlight streaming through large windows, minimalist architecture and blurred books in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgFKiL_ypxdgolVS4nCVUJ-LeLMcwCO2z3NmBGSWFcD6TIZySVjMpBXoXPm8yg8cYQ_dBHXo_vgSwzSEnyKjTyOdzkwL30iiDUxN6gWhssCyG7UcvDZ-IRrsBM_Y12ItlLjK6ob0i6dI_LCKVUL9iIfyoiH5biyWL5N3HvurGEXYUx3xui2RCnluTae3a7izpNs-k1og_Ip0yIEnF5knFkqVyQ8siQmVn347J5657fYO4tvH-zpG8jsqSfixJwwz6Zk4ybT4pG7Zkb"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+</div>
+</div>
+<!-- Essay Helper "Modal" (Integrated View) -->
+<div class="md:col-span-12 lg:col-span-7">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_12px_32px_rgba(26,28,30,0.06)] p-6 md:p-10 border border-outline-variant/15 relative overflow-hidden">
+<!-- AI Accent Glow -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/20 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="flex items-center gap-3 mb-8">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+</div>
+<div>
+<h3 class="font-headline text-2xl font-bold text-primary">SOP Intelligence Helper</h3>
+<p class="text-sm text-on-surface-variant">Drafting assistance for the Intelligent Voyager</p>
+</div>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label text-sm font-semibold text-primary px-1">Target University</label>
+<input class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline/50" placeholder="e.g. Stanford University" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label text-sm font-semibold text-primary px-1">Program Name</label>
+<input class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline/50" placeholder="e.g. MS in Data Science" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label text-sm font-semibold text-primary px-1">Career Goals</label>
+<textarea class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline/50 resize-none" placeholder="What impact do you want to make in your field over the next 10 years?" rows="4"></textarea>
+</div>
+<div class="space-y-2">
+<label class="font-label text-sm font-semibold text-primary px-1">Key Achievements</label>
+<textarea class="w-full bg-surface-container-high border-none rounded-xl px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline/50 resize-none" placeholder="List major projects, internships, or awards that define your excellence." rows="4"></textarea>
+</div>
+<div class="pt-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold py-4 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 active:scale-[0.98] transition-all shadow-xl shadow-primary/10" type="submit">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            Generate Outline
+                        </button>
+</div>
+</form>
+<div class="mt-8 p-4 bg-secondary-container/10 rounded-lg border border-secondary-container/20 flex gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="tips_and_updates">tips_and_updates</span>
+<p class="text-xs text-on-secondary-container leading-relaxed">
+<span class="font-bold">AI Tip:</span> Universities look for specific links between your past achievements and their specific curriculum. Be sure to mention 1-2 faculty members or labs.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 h-20 pb-safe bg-[#faf9fd]/80 dark:bg-[#1a1c1e]/80 backdrop-blur-md rounded-t-3xl shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+<div class="flex flex-col items-center justify-center text-[#44474e] dark:text-[#c4c6cf]">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Chat</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#44474e] dark:text-[#c4c6cf]">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] text-[11px] font-semibold">History</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#002045] dark:bg-[#76f4e0] text-[#ffffff] dark:text-[#002045] rounded-2xl px-5 py-1.5 scale-110 duration-200">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#44474e] dark:text-[#c4c6cf]">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Settings</span>
+</div>
+</nav>
+</body></html>

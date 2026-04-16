@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eligibility Result - The Digital Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c4c6cf",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary-fixed": "#002019",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#006f63",
+                        "tertiary-fixed": "#5ffbd6",
+                        "tertiary": "#00261e",
+                        "surface-container-low": "#f4f3f7",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "on-secondary-fixed": "#00201c",
+                        "secondary-container": "#76f4e0",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dad9dd",
+                        "on-surface-variant": "#43474e",
+                        "surface-container-highest": "#e3e2e6",
+                        "surface-bright": "#faf9fd",
+                        "primary-container": "#043669",
+                        "surface-container-high": "#e9e7eb",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001b3c",
+                        "inverse-surface": "#2f3033",
+                        "surface": "#faf9fd",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-tertiary-fixed-variant": "#005142",
+                        "outline": "#74777f",
+                        "surface-container": "#efedf1",
+                        "on-tertiary-container": "#00b395",
+                        "secondary": "#006b5f",
+                        "background": "#faf9fd",
+                        "tertiary-fixed-dim": "#38debb",
+                        "inverse-on-surface": "#f1f0f4",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "tertiary-container": "#003e32",
+                        "surface-tint": "#3a5f94",
+                        "on-primary-container": "#7ca0d9",
+                        "secondary-fixed": "#79f7e3",
+                        "on-background": "#1a1c1e",
+                        "on-surface": "#1a1c1e",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#002045",
+                        "inverse-primary": "#a7c8ff",
+                        "surface-variant": "#e3e2e6",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Top Navigation -->
+<header class="bg-[#faf9fd] dark:bg-slate-950 flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="Student Profile Photo" class="w-full h-full object-cover" data-alt="Close up portrait of a young smiling college student in a library setting with warm academic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmBbqmgWi89ofS8EoTjeIw7xJpbFtjBA37FcqEfQU_4YBgLqYifi4G9JAp69POouMGee0HVhb33lLs01e7vtVAvzM2S32nd18qrKnvS6ZIqYyLE_g5OB7V7J-V6v804TcnvrOCZD2BmMOPcecv24HHMhA-GB4SAiLuCCzQmxF1ZkriDIjaBGwbJrQoGOGoSVhFfW9ENOUOT_-uanHO7_DcifVN3AN5PPHlYsi1jch6wWA1agtd7SPK6xYO_EJz0CiS_5M0PYgfwBFT"/>
+</div>
+<h1 class="text-xl font-extrabold text-[#002045] dark:text-white font-headline tracking-tight">The Digital Curator</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-[#006b5f] font-semibold transition-opacity hover:opacity-80" href="#">Journey</a>
+<a class="text-slate-500 font-semibold transition-opacity hover:opacity-80" href="#">Offers</a>
+<a class="text-slate-500 font-semibold transition-opacity hover:opacity-80" href="#">Badges</a>
+<a class="text-slate-500 font-semibold transition-opacity hover:opacity-80" href="#">Profile</a>
+</nav>
+<button class="text-[#002045] dark:text-blue-100 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-28 pb-32 px-6 max-w-7xl mx-auto">
+<!-- Background Decorative Elements -->
+<div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-secondary-container/20 blur-[120px] rounded-full"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-primary-container/5 blur-[100px] rounded-full"></div>
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<!-- Left Side: Result Card -->
+<div class="w-full lg:w-2/3 space-y-8">
+<section class="bg-surface-container-lowest rounded-[2rem] p-8 md:p-12 shadow-[0_12px_32px_rgba(26,28,30,0.06)] relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+<div>
+<span class="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full text-sm font-bold font-label mb-4 inline-block">Analysis Complete</span>
+<h2 class="text-4xl md:text-5xl font-headline font-extrabold text-primary tracking-tight">You're Eligible!</h2>
+<p class="text-on-surface-variant mt-2 text-lg">Your profile has been curated against top lending criteria.</p>
+</div>
+<!-- Radial Score Gauge -->
+<div class="relative flex items-center justify-center w-48 h-48 group">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-high" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-secondary" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="82.94" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-5xl font-headline font-extrabold text-primary">85</span>
+<span class="text-sm font-label font-bold text-on-surface-variant uppercase tracking-widest">Score</span>
+</div>
+</div>
+</div>
+<!-- Loan Recommendation Banner -->
+<div class="bg-primary bg-gradient-to-br from-primary to-primary-container rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined text-3xl text-secondary-fixed">payments</span>
+</div>
+<div>
+<p class="text-on-primary-container font-label text-sm font-semibold uppercase tracking-wider">Recommended Loan Range</p>
+<p class="text-3xl font-headline font-bold">$40,000 - $65,000</p>
+</div>
+</div>
+<button class="bg-secondary-fixed text-on-secondary-fixed px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all active:scale-95 whitespace-nowrap">
+                                Apply Now
+                            </button>
+</div>
+</div>
+<!-- Subtle Decorative Image Overlay -->
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
+<img alt="Abstract Pattern" class="w-full h-full object-cover" data-alt="Subtle abstract gradient wave pattern in deep navy and teal with grainy artistic texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvGZeHuworQ_G5_vPM4T88NuwveRFGTX9tLWIj94fCYlOF9aj9b5F8wXFwqrndBaBq6ow3IhZx1TEEAxzN9jqkEA65iOOCnDZLfDES58u5G4ugvErNJApVUP-XRjE1wvi8gLNQTQOof317_cJ0z9bfZwvN-K-tpXzUnHKukIX30mT7OJsOMd5ZtNI51sWgg-grh-Wh2Sg5UBcjzcPjvMvbRzwTVt5bQZLWCXTEW8_SLmQk_nkWICXwS_oS3nLcnkL5h2LT9VxXbvBS"/>
+</div>
+</section>
+<!-- Insights Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-low rounded-2xl p-6 flex flex-col justify-between h-48">
+<span class="material-symbols-outlined text-secondary text-3xl">verified_user</span>
+<div>
+<h3 class="font-headline font-bold text-primary text-xl">High Probability</h3>
+<p class="text-on-surface-variant text-sm">Based on your academic track record and chosen program ROI.</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-6 flex flex-col justify-between h-48">
+<span class="material-symbols-outlined text-secondary text-3xl">bolt</span>
+<div>
+<h3 class="font-headline font-bold text-primary text-xl">Instant Approval</h3>
+<p class="text-on-surface-variant text-sm">Eligible for 'Fast-Track' verification with our partner banks.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Document Checklist Sidebar -->
+<aside class="w-full lg:w-1/3 bg-surface-container-low rounded-[2rem] p-8 border border-outline-variant/10">
+<h3 class="text-2xl font-headline font-extrabold text-primary mb-6">Next Steps Checklist</h3>
+<p class="text-on-surface-variant text-sm mb-8 leading-relaxed">
+                    To maintain your current eligibility score, prepare these documents for your curated application journey.
+                </p>
+<div class="space-y-4">
+<!-- Checklist Item 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl flex items-center gap-4 transition-transform hover:scale-[1.02] cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">badge</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-primary text-sm">Passport</h4>
+<p class="text-xs text-on-surface-variant">Valid for at least 6 months</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">radio_button_unchecked</span>
+</div>
+<!-- Checklist Item 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl flex items-center gap-4 transition-transform hover:scale-[1.02] cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-primary text-sm">Admission Letter</h4>
+<p class="text-xs text-on-surface-variant">Conditional or Unconditional</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">radio_button_unchecked</span>
+</div>
+<!-- Checklist Item 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl flex items-center gap-4 transition-transform hover:scale-[1.02] cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">account_balance</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-primary text-sm">Financial Statements</h4>
+<p class="text-xs text-on-surface-variant">Last 6 months activity</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">radio_button_unchecked</span>
+</div>
+<!-- Checklist Item 4 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl flex items-center gap-4 transition-transform hover:scale-[1.02] cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">description</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-primary text-sm">Academic Transcripts</h4>
+<p class="text-xs text-on-surface-variant">Degree and high school</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">radio_button_unchecked</span>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<div class="bg-secondary/5 rounded-xl p-4 flex gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-xs text-on-secondary-fixed-variant leading-relaxed">
+                            Pro tip: Higher quality document scans can increase approval speeds by up to 40%.
+                        </p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Navigation Shell (Mobile Bottom Bar) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl shadow-[0_-12px_32px_rgba(26,28,30,0.06)] rounded-t-[1.5rem]">
+<a class="flex flex-col items-center justify-center bg-[#002045] text-white rounded-2xl px-4 py-1.5 transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Journey</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl p-2 transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Offers</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl p-2 transition-all" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Badges</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#002045]/60 dark:text-slate-400 hover:bg-[#f4f3f7] dark:hover:bg-slate-800 rounded-2xl p-2 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold">Profile</span>
+</a>
+</nav>
+</body></html>
