@@ -30,8 +30,13 @@ const userSchema = new mongoose.Schema(
       targetCountries: [{ type: String }],
       targetCourses: [{ type: String }],
       budget: { type: Number },
-      workExp: { type: Number }, // in months or years
+      workExp: { type: Number }, // in years
+      researchPapers: { type: Number, default: 0 },
     },
+    savedUniversities: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'University',
+    }],
     journeyStage: {
       type: String,
       enum: ['exploration', 'shortlisting', 'applying', 'admitted'],

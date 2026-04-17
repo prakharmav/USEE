@@ -54,5 +54,8 @@ const universitySchema = new mongoose.Schema(
   }
 );
 
+// Add text index for full-text search
+universitySchema.index({ name: 'text', 'programs.name': 'text' });
+
 const University = mongoose.model('University', universitySchema);
 export default University;

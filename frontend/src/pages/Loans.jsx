@@ -1,10 +1,140 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Loans = () => {
+  const [emiInputs, setEmiInputs] = useState({
+    loanAmount: 50000,
+    interestRate: 10.5,
+    tenureMonths: 60
+  });
+  const [emiResult, setEmiResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const calculateEMI = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/tools/emi-calculator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(emiInputs),
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        setEmiResult(data.data);
+      }
+    } catch (error) {
+      console.error('EMI calculation failed', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-surface text-on-surface min-h-[calc(100vh-80px)] pb-20 flex-grow w-full">
       <main className="max-w-7xl mx-auto px-4 md:px-6 pt-8 space-y-12">
+        {/* EMI Calculator Section */}
+        <section className="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10 shadow-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl -mr-20 -mt-20"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-3xl font-extrabold text-primary font-headline tracking-tight">Smart EMI Calculator</h2>
+                <p className="text-on-surface-variant mt-2">Plan your finances with precision. Get exact monthly breakdowns instantly.</p>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <div className="flex justify-between">
+                    <label className="text-xs font-bold uppercase tracking-widest text-secondary">Loan Amount</label>
+                    <span className="text-sm font-bold text-primary">${emiInputs.loanAmount.toLocaleString()}</span>
+                  </div>
+                  <input 
+                    type="range" min="5000" max="200000" step="5000"
+                    className="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary"
+                    value={emiInputs.loanAmount}
+                    onChange={(e) => setEmiInputs({...emiInputs, loanAmount: Number(e.target.value)})}
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold uppercase tracking-widest text-secondary">Interest Rate (%)</label>
+                    <input 
+                      type="number" className="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-2 text-sm font-bold"
+                      value={emiInputs.interestRate}
+                      onChange={(e) => setEmiInputs({...emiInputs, interestRate: Number(e.target.value)})}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold uppercase tracking-widest text-secondary">Tenure (Months)</label>
+                    <input 
+                      type="number" className="w-full bg-surface-container-lowest border-none rounded-lg px-4 py-2 text-sm font-bold"
+                      value={emiInputs.tenureMonths}
+                      onChange={(e) => setEmiInputs({...emiInputs, tenureMonths: Number(e.target.value)})}
+                    />
+                  </div>
+                </div>
+                <button 
+                  onClick={calculateEMI}
+                  disabled={loading}
+                  className="w-full py-4 bg-primary text-on-primary rounded-xl font-bold shadow-lg hover:shadow-primary/20 active:scale-[0.98] transition-all"
+                >
+                  {loading ? 'Calculating...' : 'Calculate EMI'}
+                </button>
+              </div>
+            </div>
+
+            {emiResult && (
+              <div className="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10 animate-in zoom-in duration-500">
+                <div className="text-center space-y-2 mb-8">
+                  <span className="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Monthly Payment</span>
+                  <div className="text-5xl font-black text-primary">${emiResult.emi.toLocaleString()}</div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-surface-container-low rounded-lg">
+                    <p className="text-[10px] font-bold text-outline uppercase">Total Interest</p>
+                    <p className="text-lg font-bold text-secondary">${emiResult.totalInterest.toLocaleString()}</p>
+                  </div>
+                  <div className="p-4 bg-surface-container-low rounded-lg">
+                    <p className="text-[10px] font-bold text-outline uppercase">Total Payment</p>
+                    <p className="text-lg font-bold text-primary">${emiResult.totalPayment.toLocaleString()}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-8">
+                  <details className="group">
+                    <summary className="list-none flex justify-center items-center gap-2 cursor-pointer text-xs font-bold text-secondary uppercase tracking-widest">
+                      View Schedule <span className="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div className="mt-4 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                      <table className="w-full text-[11px]">
+                        <thead className="sticky top-0 bg-surface-container-lowest">
+                          <tr className="border-b border-outline-variant/20">
+                            <th className="text-left py-2">Month</th>
+                            <th className="text-right py-2">Principal</th>
+                            <th className="text-right py-2">Interest</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-on-surface-variant font-medium">
+                          {emiResult.amortizationSchedule.slice(0, 12).map(row => (
+                            <tr key={row.month} className="border-b border-outline-variant/10">
+                              <td className="py-2">{row.month}</td>
+                              <td className="text-right py-2">${row.principal}</td>
+                              <td className="text-right py-2">${row.interest}</td>
+                            </tr>
+                          ))}
+                          {emiResult.amortizationSchedule.length > 12 && (
+                            <tr><td colSpan="3" className="text-center py-2 text-[10px] italic">...and {emiResult.amortizationSchedule.length - 12} more months</td></tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* Loan Journey Progress Bar */}
         <section className="space-y-6">
           <div className="flex justify-between items-end">
@@ -17,12 +147,9 @@ const Loans = () => {
           
           <div className="bg-surface-container-low p-6 md:p-8 rounded-xl overflow-x-auto">
             <div className="relative flex justify-between min-w-[500px]">
-              {/* Progress Line Background */}
               <div className="absolute top-5 left-0 w-full h-1 bg-surface-container-highest rounded-full"></div>
-              {/* Active Progress Line */}
               <div className="absolute top-5 left-0 w-1/2 h-1 bg-gradient-to-br from-[#002045] to-[#043669] rounded-full"></div>
               
-              {/* Stages */}
               <div className="relative flex flex-col items-center gap-3 z-10 w-24">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#002045] to-[#043669] flex items-center justify-center text-white shadow-lg">
                   <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
@@ -56,7 +183,6 @@ const Loans = () => {
 
         {/* Hero: Eligibility & Featured */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Eligibility Card */}
           <div className="lg:col-span-7 bg-gradient-to-br from-[#002045] to-[#043669] rounded-xl p-8 md:p-10 text-white relative overflow-hidden flex flex-col justify-between min-h-[400px] shadow-md">
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary opacity-20 blur-[100px] -mr-20 -mt-20"></div>
             <div className="relative z-10 space-y-4 max-w-md">
@@ -75,7 +201,6 @@ const Loans = () => {
             <div className="absolute bottom-4 right-4 md:right-8 opacity-[0.03] text-6xl md:text-8xl font-black select-none pointer-events-none">LOAN HUB</div>
           </div>
           
-          {/* Side Card: Quick Insight */}
           <div className="lg:col-span-5 bg-surface-container-low rounded-xl p-8 flex flex-col justify-center gap-6 border border-outline-variant/10">
             <div className="space-y-2">
               <h3 className="text-xl font-bold text-primary font-headline">Market Pulse</h3>
@@ -111,7 +236,6 @@ const Loans = () => {
             <div className="h-px flex-1 bg-surface-container-high hidden md:block"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Conservative */}
             <div className="group bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between transition-all hover:shadow-[0_12px_32px_rgba(26,28,30,0.06)] border border-outline-variant/10 border-b-4 border-b-transparent hover:border-b-secondary">
               <div className="space-y-6">
                 <div className="flex justify-between items-start">
@@ -136,7 +260,6 @@ const Loans = () => {
               <button className="mt-8 w-full py-3 bg-surface-container-high text-primary font-bold rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">Select Plan</button>
             </div>
             
-            {/* Balanced */}
             <div className="group bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between transition-all hover:shadow-[0_12px_32px_rgba(26,28,30,0.06)] border border-outline-variant/10 border-b-4 border-b-transparent hover:border-b-secondary relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Most Popular</div>
               <div className="space-y-6">
@@ -162,7 +285,6 @@ const Loans = () => {
               <button className="mt-8 w-full py-3 bg-primary text-white font-bold rounded-lg">Select Plan</button>
             </div>
             
-            {/* Aggressive */}
             <div className="group bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between transition-all hover:shadow-[0_12px_32px_rgba(26,28,30,0.06)] border border-outline-variant/10 border-b-4 border-b-transparent hover:border-b-secondary">
               <div className="space-y-6">
                 <div className="flex justify-between items-start">
@@ -279,5 +401,7 @@ const Loans = () => {
     </div>
   );
 };
+
+export default Loans;
 
 export default Loans;

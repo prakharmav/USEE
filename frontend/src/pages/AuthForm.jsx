@@ -5,17 +5,25 @@ import { useAuthStore } from '../store/authStore';
 const AuthForm = ({ type }) => {
   const isLogin = type === 'login';
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
+  const { apiLogin, apiRegister, loading, error } = useAuthStore();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate authentication
-    login({ name: name || 'Future Voyager', email }, 'fake-jwt-token-12345');
-    navigate('/dashboard');
+    let success = false;
+    
+    if (isLogin) {
+      success = await apiLogin(email, password);
+    } else {
+      success = await apiRegister({ name, email, password });
+    }
+
+    if (success) {
+      navigate('/dashboard');
+    }
   };
 
   return (
@@ -83,6 +91,14 @@ const AuthForm = ({ type }) => {
               Sign Up
             </Link>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 bg-error-container text-on-error-container rounded-xl text-sm font-medium animate-shake">
+              {error}
+            </div>
+          )}
+
           {/* Form Fields */}
           <form className="space-y-5" onSubmit={handleSubmit}>
             {!isLogin && (
@@ -141,8 +157,11 @@ const AuthForm = ({ type }) => {
                 </p>
               </div>
             )}
-            <button className="w-full py-4 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold headline rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98]">
-              {isLogin ? 'Login to Account' : 'Create My Account'}
+            <button 
+              disabled={loading}
+              className={`w-full py-4 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold headline rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 active:scale-[0.98] ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            >
+              {loading ? 'Processing...' : (isLogin ? 'Login to Account' : 'Create My Account')}
             </button>
           </form>
           {/* Divider */}

@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "968c1f02-bda9-4a3d-b5d5-4a0dac442594",
+		"name": "Eduvion API Collection",
+		"description": "Comprehensive collection for the Eduvion platform.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "Universities",
+			"item": [
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": { "raw": "{{baseUrl}}/api/universities?country=USA&maxRanking=100", "host": ["{{baseUrl}}"], "path": ["api", "universities"], "query": [ { "key": "country", "value": "USA" }, { "key": "maxRanking", "value": "100" } ] }
+					}
+				}
+			]
+		},
+		{
+			"name": "Tools",
+			"item": [
+				{
+					"name": "ROI Calculator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"country\": \"USA\",\n  \"course\": \"CS\",\n  \"currentSalary\": 45000\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/api/tools/roi-calculator", "host": ["{{baseUrl}}"], "path": ["api", "tools", "roi-calculator"] }
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": { "type": "text/javascript", "exec": [""] }
+		},
+		{
+			"listen": "test",
+			"script": { "type": "text/javascript", "exec": [""] }
+		}
+	],
+	"variable": [
+		{ "key": "baseUrl", "value": "http://localhost:5000", "type": "string" }
+	]
+}

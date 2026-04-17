@@ -19,7 +19,7 @@ const Dashboard = () => {
           </div>
           <div>
             <h3 className="text-[#002045] dark:text-white font-bold">{user?.name || 'Future Voyager'}</h3>
-            <p className="text-xs text-slate-500">Level 4 • International Applicant</p>
+            <p className="text-xs text-slate-500 capitalize">{user?.journeyStage || 'exploration'} • International Applicant</p>
           </div>
         </div>
         
@@ -53,12 +53,12 @@ const Dashboard = () => {
         <div className="mt-auto mb-10 p-6 bg-surface-container-low rounded-2xl">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-primary uppercase tracking-wider">Gamification</span>
-            <span className="text-secondary font-bold">2,450 XP</span>
+            <span className="text-secondary font-bold">Level 1</span>
           </div>
           <div className="h-2 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-            <div className="h-full bg-secondary w-3/4"></div>
+            <div className="h-full bg-secondary w-1/4"></div>
           </div>
-          <p className="text-[10px] mt-2 text-on-surface-variant">550 XP until Level 5</p>
+          <p className="text-[10px] mt-2 text-on-surface-variant">Complete profile to level up</p>
         </div>
       </aside>
 
@@ -69,15 +69,15 @@ const Dashboard = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 text-left">
             <div>
               <h1 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-2 font-headline">
-                Welcome back, {user?.name?.split(' ')[0] || 'Alex'}.
+                Welcome back, {user?.name?.split(' ')[0] || 'Voyager'}.
               </h1>
-              <p className="text-on-surface-variant text-lg">Your journey to Global Education is 75% complete.</p>
+              <p className="text-on-surface-variant text-lg">Your global education journey is underway.</p>
             </div>
             <div className="flex flex-col items-end">
               <span className="text-sm font-bold text-secondary uppercase mb-2 tracking-widest">Current Milestone</span>
-              <div className="px-6 py-3 bg-secondary-container text-on-secondary-container rounded-full font-bold flex items-center gap-2">
+              <div className="px-6 py-3 bg-secondary-container text-on-secondary-container rounded-full font-bold flex items-center gap-2 capitalize">
                 <span className="material-symbols-outlined text-lg">rocket_launch</span>
-                Application Phase
+                {user?.journeyStage || 'Exploration'}
               </div>
             </div>
           </div>

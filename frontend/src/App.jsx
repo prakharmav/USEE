@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
+import { useAuthStore } from './store/authStore';
 
 // Pages
 import Home from './pages/Home';
@@ -20,6 +21,12 @@ import EligibilityResult from './pages/EligibilityResult';
 import EssayHelper from './pages/EssayHelper';
 
 function App() {
+  const checkAuth = useAuthStore((state) => state.checkAuth);
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen bg-background text-on-surface">
