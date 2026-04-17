@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema(
       enum: ['exploration', 'shortlisting', 'applying', 'admitted'],
       default: 'exploration',
     },
+    notificationsEnabled: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt

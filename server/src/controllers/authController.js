@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { sendNotification, welcomeEmail } from '../services/emailService.js';
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -28,6 +29,12 @@ export const register = async (req, res, next) => {
       password: hashedPassword,
       phone,
     });
+
+    // Asynchronously send welcome email without blocking
+    if (newUser.notificationsEnabled !== false) {
+      const html = welcomeEmail(newUser);
+      sendNotification(newUser.email, 'Welcome to Eduvion! 🎓', html).catch(e => console.error(e));
+    }
 
     const token = signToken(newUser._id);
 

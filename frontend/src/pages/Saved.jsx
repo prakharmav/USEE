@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import EmptyState from '../components/EmptyState';
 
 const Saved = () => {
+  // Toggle this to see empty state vs populated state
+  const [savedUniversities] = useState([]); 
   return (
     <div className="bg-surface text-on-surface font-body min-h-screen pb-32 flex-grow w-full">
       <main className="max-w-7xl mx-auto px-6 py-12">
@@ -17,12 +20,22 @@ const Saved = () => {
               Review and compare your top academic choices. Your journey to global education starts with these curated selections.
             </p>
           </div>
-          <button className="flex items-center gap-3 bg-gradient-to-br from-primary to-primary-container text-white px-8 py-4 rounded-xl font-bold shadow-[0_12px_32px_rgba(26,28,30,0.06)] hover:scale-95 transition-transform active:scale-90">
+          <button aria-label="Compare Universities" className="flex items-center gap-3 bg-gradient-to-br from-primary to-primary-container text-white px-8 py-4 rounded-xl font-bold shadow-[0_12px_32px_rgba(26,28,30,0.06)] hover:scale-95 transition-transform active:scale-90 min-h-[48px]">
             <span className="material-symbols-outlined">compare_arrows</span>
             Quick Compare Selected
           </button>
         </div>
 
+        {savedUniversities.length === 0 ? (
+          <EmptyState 
+            icon="bookmark_border"
+            title="Your List is Empty"
+            description="You haven't saved any universities yet. Head over to the Search page or use the AI predictor to find your perfect match!"
+            actionText="Start Exploring"
+            actionLink="/search"
+          />
+        ) : (
+        <>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Card 1: Stanford */}
           <div className="bg-surface-container-lowest rounded-xl overflow-hidden group hover:shadow-[0_12px_32px_rgba(26,28,30,0.06)] transition-all flex flex-col shadow-sm">
@@ -231,6 +244,8 @@ const Saved = () => {
             </div>
           </div>
         </section>
+        </>
+        )}
       </main>
     </div>
   );

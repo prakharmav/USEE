@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-
-const API_URL = 'http://localhost:5000/api';
+import { toast } from 'react-toastify';
+import { apiFetch } from '../services/api';
 
 export const useAuthStore = create((set, get) => ({
   user: null,
@@ -24,12 +24,11 @@ export const useAuthStore = create((set, get) => ({
   apiLogin: async (email, password) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`${API_URL}/auth/login`, {
+      const response = await apiFetch('/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-      const result = await response.json();
+      const result = response.data;
       
       if (result.status === 'success') {
         get().setAuth(result.data.user, result.token);
@@ -47,22 +46,24 @@ export const useAuthStore = create((set, get) => ({
   apiRegister: async (userData) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`${API_URL}/auth/register`, {
+      const response = await apiFetch('/api/auth/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
       });
-      const result = await response.json();
+      const result = response.data;
       
       if (result.status === 'success') {
         get().setAuth(result.data.user, result.token);
+        toast.success('Account created successfully!');
         return true;
       } else {
         set({ error: result.message, loading: false });
+        toast.error(result.message || 'Registration failed.');
         return false;
       }
     } catch (err) {
       set({ error: 'Connection to server failed', loading: false });
+      toast.error('Connection to server failed. Please try again.');
       return false;
     }
   },
@@ -73,10 +74,8 @@ export const useAuthStore = create((set, get) => ({
 
     set({ loading: true });
     try {
-      const response = await fetch(`${API_URL}/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const result = await response.json();
+      const response = await apiFetch('/api/auth/me');
+      const result = response.data;
 
       if (result.status === 'success') {
         set({ user: result.data.user, isAuthenticated: true, loading: false });
@@ -89,29 +88,28 @@ export const useAuthStore = create((set, get) => ({
   },
 
   updateUserProfile: async (data) => {
-    const token = get().token;
     try {
-      const response = await fetch(`${API_URL}/users/profile`, {
+      const response = await apiFetch('/api/users/profile', {
         method: 'PUT',
-        headers: { 
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}` 
-        },
         body: JSON.stringify(data),
       });
-      const result = await response.json();
+      const result = response.data;
 
       if (result.status === 'success') {
         set({ user: result.data.user });
+        toast.success('Profile updated successfully!');
         return true;
       }
+      toast.error(result.message || 'Failed to update profile.');
       return false;
     } catch (err) {
+      toast.error('Failed to update profile due to network error.');
       return false;
     }
   },
 
   logout: () => {
     get().clearAuth();
+    toast.info('Logged out securely.');
   },
 }));

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import SkeletonLoader from '../components/SkeletonLoader';
+import { apiFetch } from '../services/api';
 
 const ROI = () => {
   const [inputs, setInputs] = useState({
@@ -15,20 +18,22 @@ const ROI = () => {
   const handleCalculate = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/tools/roi-calculator', {
+      const response = await apiFetch('/api/tools/roi-calculator', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...inputs,
           universityId: '65f123456789012345678901' // Placeholder or selected ID
         }),
       });
-      const data = await response.json();
+      const data = response.data;
       if (data.status === 'success') {
         setResult(data.data);
+        toast.success('ROI Recalculated!');
+      } else {
+        toast.error(data.message || 'Calculation Failed.');
       }
     } catch (error) {
-      console.error('Calculation failed', error);
+      toast.error('Calculation server unreachable.');
     } finally {
       setLoading(false);
     }
@@ -110,8 +115,10 @@ const ROI = () => {
           </div>
         </section>
 
-        {/* Results Visualization */}
-        {result && (
+        {loading ? (
+           <div className="mt-8"><SkeletonLoader type="card" /></div>
+        ) : result && (
+           /* ... existing result ... */
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Donut Chart Visualization */}
             <section>
@@ -197,7 +204,5 @@ const ROI = () => {
     </div>
   );
 };
-
-export default ROI;
 
 export default ROI;

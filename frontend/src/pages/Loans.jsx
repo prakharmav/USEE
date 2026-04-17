@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import SkeletonLoader from '../components/SkeletonLoader';
+import EmptyState from '../components/EmptyState';
+import { apiFetch } from '../services/api';
 
 const Loans = () => {
   const [emiInputs, setEmiInputs] = useState({
@@ -9,21 +13,59 @@ const Loans = () => {
   });
   const [emiResult, setEmiResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  
+  // Eligibility State
+  const [eligibilityData, setEligibilityData] = useState(null);
+  const [checkingEligibility, setCheckingEligibility] = useState(false);
+  const [showEligibilityForm, setShowEligibilityForm] = useState(false);
+  const [eligibilityInputs, setEligibilityInputs] = useState({
+      gpa: 3.5,
+      gre: 310,
+      workExperience: 2,
+      coApplicantIncome: 1200000,
+      universityRanking: 150
+  });
+
+  const handleCheckEligibility = async () => {
+    setCheckingEligibility(true);
+    try {
+      const response = await apiFetch('/api/loans/check-eligibility', {
+        method: 'POST',
+        body: JSON.stringify({ profile: eligibilityInputs })
+      });
+      const data = response.data;
+      if (data.status === 'success') {
+        setEligibilityData(data.data);
+        toast.success('Eligibility analyzed successfully!');
+      } else {
+        toast.error(data.message || 'Eligibility check failed');
+      }
+    } catch (error) {
+      console.error('Eligibility check failed:', error);
+      toast.error('Network Error during Eligibility check');
+    } finally {
+      setCheckingEligibility(false);
+      setShowEligibilityForm(false);
+    }
+  };
 
   const calculateEMI = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/tools/emi-calculator', {
+      const response = await apiFetch('/api/tools/emi-calculator', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(emiInputs),
       });
-      const data = await response.json();
+      const data = response.data;
       if (data.status === 'success') {
         setEmiResult(data.data);
+        toast.success('EMI Calculated');
+      } else {
+        toast.error('Failed to calculate EMI');
       }
     } catch (error) {
       console.error('EMI calculation failed', error);
+      toast.error('Calculation server unreachable.');
     } finally {
       setLoading(false);
     }
@@ -83,7 +125,9 @@ const Loans = () => {
               </div>
             </div>
 
-            {emiResult && (
+            {loading ? (
+               <SkeletonLoader type="card" />
+            ) : emiResult && (
               <div className="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10 animate-in zoom-in duration-500">
                 <div className="text-center space-y-2 mb-8">
                   <span className="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Monthly Payment</span>
@@ -142,8 +186,16 @@ const Loans = () => {
               <h2 className="text-2xl font-bold tracking-tight text-primary font-headline">Application Track</h2>
               <p className="text-on-surface-variant text-sm md:text-base">Real-time status of your financial journey.</p>
             </div>
-            <span className="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Active</span>
           </div>
+          
+          {/* Static Application Array Check */}
+          {[] && [].length === 0 ? (
+            <EmptyState 
+              icon="description"
+              title="No Active Applications"
+              description="You have not submitted any loan applications yet. Check your eligibility above to unlock partner offers."
+            />
+          ) : (
           
           <div className="bg-surface-container-low p-6 md:p-8 rounded-xl overflow-x-auto">
             <div className="relative flex justify-between min-w-[500px]">
@@ -179,6 +231,7 @@ const Loans = () => {
               </div>
             </div>
           </div>
+          )}
         </section>
 
         {/* Hero: Eligibility & Featured */}
@@ -193,10 +246,42 @@ const Loans = () => {
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight font-headline">Check your pre-approved limit in 2 minutes.</h2>
               <p className="text-primary-fixed opacity-90 text-sm md:text-lg">Our curator analyzes 20+ NBFCs to find the perfect fit for your academic profile.</p>
             </div>
+
+            {/* Eligibility Form / Results Area */}
             <div className="relative z-10 pt-8">
-              <button className="bg-secondary-fixed text-on-secondary-fixed px-6 py-4 rounded-xl font-bold text-sm md:text-lg shadow-[0_12px_32px_rgba(26,28,30,0.15)] hover:scale-105 transition-transform">
-                Check Eligibility Now
-              </button>
+              {!showEligibilityForm && !eligibilityData && (
+                <button 
+                  onClick={() => setShowEligibilityForm(true)}
+                  className="bg-secondary-fixed text-on-secondary-fixed px-6 py-4 rounded-xl font-bold text-sm md:text-lg shadow-[0_12px_32px_rgba(26,28,30,0.15)] hover:scale-105 transition-transform">
+                  Check Eligibility Now
+                </button>
+              )}
+
+              {showEligibilityForm && (
+                <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl max-w-sm space-y-3 mt-4 border border-white/20">
+                  <div className="grid grid-cols-2 gap-3">
+                     <input type="number" placeholder="GPA (out of 4)" className="px-3 py-2 rounded text-black text-sm" value={eligibilityInputs.gpa} onChange={e => setEligibilityInputs({...eligibilityInputs, gpa: Number(e.target.value)})}/>
+                     <input type="number" placeholder="GRE Score" className="px-3 py-2 rounded text-black text-sm" value={eligibilityInputs.gre} onChange={e => setEligibilityInputs({...eligibilityInputs, gre: Number(e.target.value)})}/>
+                     <input type="number" placeholder="Work Exp (Yrs)" className="px-3 py-2 rounded text-black text-sm" value={eligibilityInputs.workExperience} onChange={e => setEligibilityInputs({...eligibilityInputs, workExperience: Number(e.target.value)})}/>
+                     <input type="number" placeholder="Uni Ranking" className="px-3 py-2 rounded text-black text-sm" value={eligibilityInputs.universityRanking} onChange={e => setEligibilityInputs({...eligibilityInputs, universityRanking: Number(e.target.value)})}/>
+                  </div>
+                  <input type="number" placeholder="Co-Applicant Income (INR)" className="w-full px-3 py-2 rounded text-black text-sm" value={eligibilityInputs.coApplicantIncome} onChange={e => setEligibilityInputs({...eligibilityInputs, coApplicantIncome: Number(e.target.value)})}/>
+                  <div className="flex gap-2">
+                    <button onClick={handleCheckEligibility} disabled={checkingEligibility} className="flex-1 bg-primary text-white py-2 rounded font-bold">{checkingEligibility ? 'Checking...' : 'Submit'}</button>
+                    <button onClick={() => setShowEligibilityForm(false)} className="px-4 py-2 bg-white/20 rounded font-bold text-white">Cancel</button>
+                  </div>
+                </div>
+              )}
+
+              {eligibilityData && (
+                <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl max-w-sm space-y-3 mt-4 border border-white/20">
+                  <h3 className="font-bold text-lg text-secondary-fixed">Analysis Complete</h3>
+                  <div className="flex justify-between text-sm"><span className="opacity-80">Eligibility Score:</span> <span className="font-bold">{eligibilityData.eligibilityScore}/100</span></div>
+                  <div className="flex justify-between text-sm"><span className="opacity-80">Estimated Rate:</span> <span className="font-bold">{eligibilityData.estimatedInterestRate}%</span></div>
+                  <div className="flex justify-between text-sm"><span className="opacity-80">Max Term Loan:</span> <span className="font-bold cursor-help" title={`Min: ₹${eligibilityData.loanAmount.min}`}>₹{eligibilityData.loanAmount.max.toLocaleString('en-IN')}</span></div>
+                  <button onClick={() => setEligibilityData(null)} className="mt-2 text-xs opacity-70 hover:opacity-100 underline decoration-dotted">Recalculate</button>
+                </div>
+              )}
             </div>
             <div className="absolute bottom-4 right-4 md:right-8 opacity-[0.03] text-6xl md:text-8xl font-black select-none pointer-events-none">LOAN HUB</div>
           </div>
@@ -326,48 +411,55 @@ const Loans = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-surface-container">
-                <tr className="hover:bg-surface-container-low transition-colors">
-                  <td className="px-6 py-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center font-bold text-primary text-xs">EF</div>
-                      <span className="font-semibold text-primary">EduFinance Corp</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-6 font-medium text-on-surface">8.45% p.a. onwards</td>
-                  <td className="px-6 py-6 text-on-surface-variant text-sm">0.5% + Taxes</td>
-                  <td className="px-6 py-6 text-on-surface-variant text-sm">3-5 Working Days</td>
-                  <td className="px-6 py-6">
-                    <Link to="#" className="text-secondary font-bold text-sm hover:underline">View Details</Link>
-                  </td>
-                </tr>
-                <tr className="hover:bg-surface-container-low transition-colors">
-                  <td className="px-6 py-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">GL</div>
-                      <span className="font-semibold text-primary">Global Lend</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-6 font-medium text-on-surface">9.10% p.a. onwards</td>
-                  <td className="px-6 py-6 text-on-surface-variant text-sm">NIL (Promotional)</td>
-                  <td className="px-6 py-6 text-on-surface-variant text-sm">48 Hours</td>
-                  <td className="px-6 py-6">
-                    <Link to="#" className="text-secondary font-bold text-sm hover:underline">View Details</Link>
-                  </td>
-                </tr>
-                <tr className="hover:bg-surface-container-low transition-colors">
-                  <td className="px-6 py-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded bg-tertiary-fixed-dim flex items-center justify-center font-bold text-on-tertiary-fixed text-xs">SA</div>
-                      <span className="font-semibold text-primary">Scholar Asset</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-6 font-medium text-on-surface">8.85% p.a. onwards</td>
-                  <td className="px-6 py-6 text-on-surface-variant text-sm">1.0% Flat</td>
-                  <td className="px-6 py-6 text-on-surface-variant text-sm">7 Working Days</td>
-                  <td className="px-6 py-6">
-                    <Link to="#" className="text-secondary font-bold text-sm hover:underline">View Details</Link>
-                  </td>
-                </tr>
+                {eligibilityData?.nbfcOptions ? (
+                  eligibilityData.nbfcOptions.map(nbfc => (
+                    <tr key={nbfc.id} className="hover:bg-surface-container-low transition-colors">
+                      <td className="px-6 py-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center font-bold text-primary text-xs">{nbfc.name.substring(0, 2).toUpperCase()}</div>
+                          <span className="font-semibold text-primary">{nbfc.name}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-6 font-medium text-on-surface">{nbfc.interestRate}% p.a.</td>
+                      <td className="px-6 py-6 text-on-surface-variant text-sm">{nbfc.processingFee}</td>
+                      <td className="px-6 py-6 text-on-surface-variant text-sm">{nbfc.collateralRequired}</td>
+                      <td className="px-6 py-6">
+                        <Link to="#" className="text-secondary font-bold text-sm hover:underline" title={nbfc.note}>Apply Now</Link>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <>
+                    <tr className="hover:bg-surface-container-low transition-colors">
+                      <td className="px-6 py-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center font-bold text-primary text-xs">EF</div>
+                          <span className="font-semibold text-primary">EduFinance Corp</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-6 font-medium text-on-surface">8.45% p.a. onwards</td>
+                      <td className="px-6 py-6 text-on-surface-variant text-sm">0.5% + Taxes</td>
+                      <td className="px-6 py-6 text-on-surface-variant text-sm">3-5 Working Days</td>
+                      <td className="px-6 py-6">
+                        <Link to="#" className="text-secondary font-bold text-sm hover:underline">View Details</Link>
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-surface-container-low transition-colors">
+                      <td className="px-6 py-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">GL</div>
+                          <span className="font-semibold text-primary">Global Lend</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-6 font-medium text-on-surface">9.10% p.a. onwards</td>
+                      <td className="px-6 py-6 text-on-surface-variant text-sm">NIL (Promotional)</td>
+                      <td className="px-6 py-6 text-on-surface-variant text-sm">48 Hours</td>
+                      <td className="px-6 py-6">
+                        <Link to="#" className="text-secondary font-bold text-sm hover:underline">View Details</Link>
+                      </td>
+                    </tr>
+                  </>
+                )}
               </tbody>
             </table>
           </div>
@@ -404,4 +496,3 @@ const Loans = () => {
 
 export default Loans;
 
-export default Loans;

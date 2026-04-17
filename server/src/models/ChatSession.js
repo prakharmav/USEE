@@ -31,6 +31,14 @@ const chatSessionSchema = new mongoose.Schema(
       required: true,
       default: 'general',
     },
+    title: {
+      type: String,
+      default: 'New Conversation',
+    },
+    messageCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true, // Automatically manages createdAt and updatedAt

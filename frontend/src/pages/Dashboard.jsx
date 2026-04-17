@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import { useGamificationStore } from '../store/gamificationStore';
 
 const Dashboard = () => {
   const user = useAuthStore((state) => state.user);
-  
+  const { stats, fetchStats } = useGamificationStore();
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats]);
+
+  // Calculate Level and Progress
+  // e.g. 100 points = Level 2, 300 = Level 3, 600 = Level 4. Simple tiered math.
+  const calculateLevel = (points) => {
+    if (points >= 600) return { level: 4, next: 1000 };
+    if (points >= 300) return { level: 3, next: 600 };
+    if (points >= 100) return { level: 2, next: 300 };
+    return { level: 1, next: 100 };
+  };
+
+  const { level, next } = calculateLevel(stats.totalPoints || 0);
+  const progressPercent = Math.min(((stats.totalPoints || 0) / next) * 100, 100);
+
   return (
     <div className="flex flex-col md:flex-row flex-grow w-full bg-surface min-h-[calc(100vh-80px)]">
       {/* NavigationDrawer (Sidebar) */}
@@ -50,15 +68,26 @@ const Dashboard = () => {
           </Link>
         </nav>
         
-        <div className="mt-auto mb-10 p-6 bg-surface-container-low rounded-2xl">
+        <div className="mt-auto mb-10 p-6 bg-surface-container-low rounded-2xl border border-outline-variant/10">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-primary uppercase tracking-wider">Gamification</span>
-            <span className="text-secondary font-bold">Level 1</span>
+            <span className="text-xs font-bold text-primary uppercase tracking-wider">Level {level}</span>
+            <span className="text-secondary font-bold text-sm tracking-tight">{stats.totalPoints || 0} XP</span>
           </div>
           <div className="h-2 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-            <div className="h-full bg-secondary w-1/4"></div>
+            <div className="h-full bg-gradient-to-r from-secondary to-primary" style={{ width: `${progressPercent}%` }}></div>
           </div>
-          <p className="text-[10px] mt-2 text-on-surface-variant">Complete profile to level up</p>
+          <p className="text-[10px] mt-3 text-on-surface-variant font-medium flex justify-between items-center">
+            <span>+{next - (stats.totalPoints || 0)} XP to Next Level</span>
+            <span className="flex items-center gap-1 text-primary"><span className="material-symbols-outlined text-[10px]">local_fire_department</span> {stats.streak || 0}d</span>
+          </p>
+
+          {stats.badges?.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-outline-variant/10 flex flex-wrap gap-2">
+              {stats.badges.map((b, i) => (
+                <span key={i} className="text-[9px] font-bold uppercase py-1 px-2 bg-primary/10 text-primary rounded-md">{b}</span>
+              ))}
+            </div>
+          )}
         </div>
       </aside>
 

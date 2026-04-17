@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import SkeletonLoader from '../components/SkeletonLoader';
+import { apiFetch } from '../services/api';
 
 const Predict = () => {
   const [inputs, setInputs] = useState({
@@ -16,17 +19,19 @@ const Predict = () => {
   const handlePredict = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/tools/eligibility-estimator', {
+      const response = await apiFetch('/api/tools/eligibility-estimator', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inputs),
       });
-      const data = await response.json();
+      const data = response.data;
       if (data.status === 'success') {
         setResult(data.data);
+        toast.success("Prediction Analyzed!");
+      } else {
+        toast.error(data.message || 'Analysis failed.');
       }
     } catch (error) {
-      console.error('Prediction failed', error);
+      toast.error('Network Error: Could not reach prediction engine.');
     } finally {
       setLoading(false);
     }
@@ -114,10 +119,7 @@ const Predict = () => {
 
             <div className="space-y-6">
               {loading ? (
-                <div className="flex flex-col items-center justify-center py-20 opacity-50">
-                  <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
-                  <p className="font-bold text-primary">Curating your future...</p>
-                </div>
+                 <SkeletonLoader type="list" />
               ) : result?.recommendedUniversities.length > 0 ? (
                 result.recommendedUniversities.map((uni, index) => (
                   <div key={uni._id} className="group bg-surface-container-lowest rounded-xl p-6 flex flex-col md:flex-row gap-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-all">
@@ -197,4 +199,3 @@ const Predict = () => {
 
 export default Predict;
 
-export default Predict;

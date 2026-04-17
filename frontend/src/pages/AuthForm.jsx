@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import { useGamificationStore } from '../store/gamificationStore';
 
 const AuthForm = ({ type }) => {
   const isLogin = type === 'login';
@@ -19,6 +20,10 @@ const AuthForm = ({ type }) => {
       success = await apiLogin(email, password);
     } else {
       success = await apiRegister({ name, email, password });
+      if (success) {
+        // Trigger gamification XP burst for completing profile
+        useGamificationStore.getState().logEvent('profile_complete');
+      }
     }
 
     if (success) {

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import SkeletonLoader from '../components/SkeletonLoader';
+import { apiFetch } from '../services/api';
 
 const UniversitySearch = () => {
   const [universities, setUniversities] = useState([]);
@@ -22,15 +25,17 @@ const UniversitySearch = () => {
         ...Object.fromEntries(Object.entries(filters).filter(([_, v]) => v)),
       });
 
-      const response = await fetch(`http://localhost:5000/api/universities?${queryParams}`);
-      const result = await response.json();
+      const response = await apiFetch(`/api/universities?${queryParams}`);
+      const result = response.data;
       
       if (result.status === 'success') {
         setUniversities(result.data.universities);
         setStats({ totalCount: result.data.totalCount });
+      } else {
+        toast.error('Failed to load universities.');
       }
     } catch (error) {
-      console.error('Failed to fetch universities:', error);
+      toast.error('Network Error: Database unreachable.');
     } finally {
       setLoading(false);
     }
@@ -110,10 +115,7 @@ const UniversitySearch = () => {
           </div>
           
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 opacity-50">
-              <span className="material-symbols-outlined text-6xl animate-spin text-primary">progress_activity</span>
-              <p className="mt-4 font-headline font-bold text-outline">Curating your future...</p>
-            </div>
+            <div className="mt-6"><SkeletonLoader type="list" /></div>
           ) : universities.length > 0 ? (
             universities.map((uni) => (
               <div key={uni._id} className="bg-surface-container-lowest rounded-xl p-5 shadow-[0_12px_32px_rgba(26,28,30,0.06)] relative group border border-outline-variant/10">

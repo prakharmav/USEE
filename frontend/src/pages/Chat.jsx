@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuthStore } from '../store/authStore';
+import SkeletonLoader from '../components/SkeletonLoader';
+import EmptyState from '../components/EmptyState';
 
 const Chat = () => {
   const user = useAuthStore(state => state.user);
@@ -12,6 +14,15 @@ const Chat = () => {
   ]);
   const [input, setInput] = useState('');
   const [isCurating, setIsCurating] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isCurating]);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -87,44 +98,37 @@ const Chat = () => {
           <button className="px-4 py-1.5 rounded-full text-xs font-semibold bg-surface-container-highest text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all">Visa Guide</button>
         </div>
 
-        {/* Message Thread */}
-        <div className="flex-1 overflow-y-auto px-6 md:px-24 py-8 space-y-8 flex flex-col pb-48">
-          {messages.map((msg, idx) => (
-            <div key={idx} className={`flex items-start space-x-4 max-w-3xl ${msg.role === 'user' ? 'self-end flex-row-reverse space-x-reverse' : ''}`}>
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg ${msg.role === 'ai' ? 'bg-primary' : 'bg-secondary'}`}>
-                <span className="material-symbols-outlined text-white text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                  {msg.role === 'ai' ? 'smart_toy' : 'person'}
-                </span>
-              </div>
-              <div className={`p-5 rounded-2xl shadow-sm text-sm leading-relaxed border ${msg.role === 'ai' ? 'bg-white text-on-surface rounded-tl-none border-[#efedf1]' : 'bg-primary-container text-white rounded-tr-none border-transparent'}`}>
-                <p>{msg.content}</p>
-                <p className={`text-[10px] mt-2 opacity-50 font-bold uppercase tracking-widest ${msg.role === 'user' ? 'text-right' : ''}`}>
-                  {msg.time}
-                </p>
-              </div>
+        <div className="flex-1 overflow-y-auto px-6 md:px-24 py-8 space-y-8 flex flex-col pb-64 md:pb-72 custom-scrollbar">
+          {messages.length === 0 ? (
+            <div className="flex-grow flex items-center justify-center">
+              <EmptyState 
+                icon="chat_bubble" 
+                title="No active sessions" 
+                description="Start a new conversation to get personalized academic advice, financial modeling, or visa tracking."
+              />
             </div>
-          ))}
+          ) : (
+            messages.map((msg, idx) => (
+              <div key={idx} className={`flex items-start space-x-4 max-w-3xl ${msg.role === 'user' ? 'self-end flex-row-reverse space-x-reverse' : ''}`}>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg ${msg.role === 'ai' ? 'bg-primary' : 'bg-secondary'}`}>
+                  <span className="material-symbols-outlined text-white text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    {msg.role === 'ai' ? 'smart_toy' : 'person'}
+                  </span>
+                </div>
+                <div className={`p-5 rounded-2xl shadow-sm text-sm leading-relaxed border ${msg.role === 'ai' ? 'bg-white text-on-surface rounded-tl-none border-[#efedf1]' : 'bg-primary-container text-white rounded-tr-none border-transparent'}`}>
+                  <p>{msg.content}</p>
+                  <p className={`text-[10px] mt-2 opacity-50 font-bold uppercase tracking-widest ${msg.role === 'user' ? 'text-right' : ''}`}>
+                    {msg.time}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
 
           {isCurating && (
-            <div className="flex items-start space-x-4 max-w-3xl">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
-                <span className="material-symbols-outlined text-white text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>smart_toy</span>
-              </div>
-              <div className="bg-white p-5 rounded-2xl rounded-tl-none shadow-sm border border-[#efedf1] w-full">
-                <div className="flex items-center space-x-1 mb-2">
-                  <span className="text-xs font-bold text-secondary uppercase tracking-widest">Eduvion Analysis</span>
-                </div>
-                <div className="space-y-3">
-                  <div className="h-4 bg-slate-100 rounded animate-pulse w-full"></div>
-                  <div className="h-4 bg-slate-100 rounded animate-pulse w-5/6"></div>
-                </div>
-                <div className="mt-4 flex items-center text-secondary">
-                  <span className="w-1.5 h-4 bg-secondary rounded-full animate-bounce mr-2"></span>
-                  <span className="text-xs italic">Consulting academic database...</span>
-                </div>
-              </div>
-            </div>
+             <SkeletonLoader type="chat" />
           )}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Input Area */}
@@ -148,7 +152,7 @@ const Chat = () => {
             
             <div className="relative bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-2 border border-[#efedf1] dark:border-slate-800 flex flex-col">
               <textarea 
-                className="w-full bg-transparent border-none focus:ring-0 text-sm p-4 h-24 resize-none placeholder-slate-400" 
+                className="w-full bg-transparent border-none focus:ring-0 text-sm p-4 h-24 resize-none placeholder-slate-400 text-slate-800 dark:text-white" 
                 placeholder="Ask anything about your global education journey..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -156,10 +160,11 @@ const Chat = () => {
               />
               <div className="flex items-center justify-between px-4 pb-2">
                 <div className="flex items-center space-x-3">
-                  <button className="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">attachment</button>
-                  <button className="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">mic</button>
+                  <button aria-label="Attach File" className="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">attachment</button>
+                  <button aria-label="Use Microphone" className="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">mic</button>
                 </div>
                 <button 
+                  aria-label="Send Message"
                   onClick={handleSend}
                   className="bg-primary text-white p-3 rounded-xl hover:scale-105 transition-all shadow-md flex items-center justify-center"
                 >
