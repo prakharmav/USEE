@@ -11,6 +11,7 @@ const AuthForm = ({ type }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -146,12 +147,18 @@ const AuthForm = ({ type }) => {
                 <input 
                   className="w-full pl-12 pr-12 py-3.5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline" 
                   placeholder="••••••••" 
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <button className="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface transition-colors" type="button">visibility</button>
+                <button 
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface transition-colors" 
+                  type="button"
+                >
+                  {showPassword ? 'visibility_off' : 'visibility'}
+                </button>
               </div>
             </div>
             {!isLogin && (
