@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAuthStore } from '../store/authStore';
 import SkeletonLoader from '../components/SkeletonLoader';
 import EmptyState from '../components/EmptyState';
+import { apiFetch } from '../services/api';
 
 const Chat = () => {
   const user = useAuthStore(state => state.user);
@@ -16,6 +17,8 @@ const Chat = () => {
   const [isCurating, setIsCurating] = useState(false);
   const messagesEndRef = useRef(null);
 
+  const [sessionId, setSessionId] = useState(null);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -24,19 +27,33 @@ const Chat = () => {
     scrollToBottom();
   }, [messages, isCurating]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
-    setMessages([...messages, { role: 'user', time: 'Just now', content: input }]);
+    const userMessage = input;
+    setMessages(prev => [...prev, { role: 'user', time: 'Just now', content: userMessage }]);
     setInput('');
     setIsCurating(true);
-    setTimeout(() => {
+    
+    try {
+      const response = await apiFetch('/api/chat/message', {
+        method: 'POST',
+        body: JSON.stringify({ message: userMessage, sessionId, type: 'general' })
+      });
+      if (response.ok && response.data?.data) {
+        setSessionId(response.data.data.sessionId);
+        setMessages(prev => [...prev, {
+          role: 'ai',
+          time: 'Just now',
+          content: response.data.data.response
+        }]);
+      } else {
+        setMessages(prev => [...prev, { role: 'ai', time: 'Just now', content: 'Sorry, I encountered an error. Please try again.' }]);
+      }
+    } catch (error) {
+      setMessages(prev => [...prev, { role: 'ai', time: 'Just now', content: 'Network error. Please try again later.' }]);
+    } finally {
       setIsCurating(false);
-      setMessages(prev => [...prev, {
-        role: 'ai',
-        time: 'Just now',
-        content: "I've analyzed your query regarding that. Based on the current academic database, MIT and similar institutions emphasize a holistic profile. For your specific background, focusing on the Quantitative section of the GRE while maintaining a 3.8+ GPA would be ideal."
-      }]);
-    }, 2000);
+    }
   };
 
   return (

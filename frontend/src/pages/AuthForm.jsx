@@ -153,8 +153,8 @@ const AuthForm = ({ type }) => {
                   required
                 />
                 <button 
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface transition-colors" 
+                  onClick={(e) => { e.preventDefault(); setShowPassword(!showPassword); }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface transition-colors z-10 cursor-pointer" 
                   type="button"
                 >
                   {showPassword ? 'visibility_off' : 'visibility'}

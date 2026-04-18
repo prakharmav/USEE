@@ -12,6 +12,16 @@ const Navbar = () => {
     navigate('/login');
   };
 
+  const toggleTheme = () => {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  };
+
   const navItemClass = (path) => {
     const isActive = location.pathname === path;
     if (isActive) {
@@ -49,13 +59,22 @@ const Navbar = () => {
               </div>
               <span className="hidden lg:block text-sm font-bold text-primary headline tracking-tight">{user?.name}</span>
             </Link>
-            <button 
-              onClick={handleLogout}
-              className="p-2 text-outline hover:text-error transition-colors rounded-full hover:bg-error-container/50"
-              title="Logout"
-            >
-              <span className="material-symbols-outlined">logout</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={toggleTheme}
+                className="p-2 text-outline hover:text-primary transition-colors rounded-full hover:bg-primary-container/50"
+                title="Toggle Theme"
+              >
+                <span className="material-symbols-outlined">light_mode</span>
+              </button>
+              <button 
+                onClick={handleLogout}
+                className="p-2 text-outline hover:text-error transition-colors rounded-full hover:bg-error-container/50"
+                title="Logout"
+              >
+                <span className="material-symbols-outlined">logout</span>
+              </button>
+            </div>
           </div>
         ) : (
           <div className="flex items-center gap-3">
