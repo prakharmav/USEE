@@ -78,10 +78,10 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex items-center gap-3">
-            <Link to="/login" className="border-2 border-primary dark:border-[#76f4e0] text-primary dark:text-[#76f4e0] px-5 py-1.5 rounded-xl font-bold hover:bg-primary/5 dark:hover:bg-[#76f4e0]/10 transition-colors">
+            <Link to="/login" className="px-5 py-1.5 rounded-xl font-bold border-2 border-primary text-primary hover:bg-primary/5 dark:border-secondary-container dark:text-secondary-container dark:hover:bg-secondary-container/10 transition-colors">
               Login
             </Link>
-            <Link to="/register" className="bg-primary dark:bg-[#76f4e0] text-on-primary dark:text-[#002045] px-5 py-1.5 rounded-xl font-bold border-2 border-primary dark:border-[#76f4e0] hover:bg-primary/90 dark:hover:bg-[#76f4e0]/90 transition-colors shadow-sm">
+            <Link to="/register" className="px-5 py-1.5 rounded-xl font-bold border-2 border-primary bg-primary text-on-primary hover:bg-primary/90 dark:border-secondary-container dark:bg-secondary-container dark:text-[#002045] dark:hover:bg-secondary-container/90 transition-colors shadow-sm">
               Sign Up
             </Link>
           </div>
