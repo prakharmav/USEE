@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, login, getMe } from '../controllers/authController.js';
+import { register, login, getMe, googleLogin, linkedinLogin } from '../controllers/authController.js';
 import { verifyToken } from '../middleware/auth.js';
 import { authLimiter } from '../middleware/rateLimiter.js'; // Assuming authLimiter exists
 
@@ -63,5 +63,8 @@ router.post('/login', authLimiter, login);
  *         description: User data retrieved
  */
 router.get('/me', verifyToken, getMe);
+
+router.post('/google', authLimiter, googleLogin);
+router.post('/linkedin', authLimiter, linkedinLogin);
 
 export default router;

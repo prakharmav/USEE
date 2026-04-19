@@ -2,16 +2,32 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useGamificationStore } from '../store/gamificationStore';
+import { GoogleLogin } from '@react-oauth/google';
+import { useLinkedIn } from 'react-linkedin-login-oauth2';
 
 const AuthForm = ({ type }) => {
   const isLogin = type === 'login';
   const navigate = useNavigate();
-  const { apiLogin, apiRegister, loading, error } = useAuthStore();
+  const { apiLogin, apiRegister, apiGoogleLogin, apiLinkedinLogin, loading, error } = useAuthStore();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const { linkedInLogin } = useLinkedIn({
+    clientId: import.meta.env.VITE_LINKEDIN_CLIENT_ID || 'dummy_client_id',
+    redirectUri: import.meta.env.VITE_LINKEDIN_REDIRECT_URI || `${window.location.origin}/auth/linkedin/callback`,
+    onSuccess: async (code) => {
+      const success = await apiLinkedinLogin(code);
+      if (success) {
+        navigate('/dashboard');
+      }
+    },
+    onError: (error) => {
+      console.error('LinkedIn Login Failed:', error);
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -186,11 +202,24 @@ const AuthForm = ({ type }) => {
             </div>
           </div>
           {/* Social Logins */}
-          <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
-              <span className="text-sm font-medium text-on-surface">Google</span>
-            </button>
-            <button className="flex items-center justify-center gap-3 py-3 px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
+          <div className="grid grid-cols-2 gap-4 pb-2">
+            <div className="flex items-center justify-center h-12 overflow-hidden rounded-xl">
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  const success = await apiGoogleLogin(credentialResponse.credential);
+                  if (success) navigate('/dashboard');
+                }}
+                onError={() => console.error('Google Login Failed')}
+                shape="rectangular"
+                width="100%"
+              />
+            </div>
+            <button 
+              onClick={linkedInLogin}
+              type="button"
+              className="flex items-center justify-center gap-3 h-[40px] px-4 bg-surface-container-lowest border border-outline-variant/20 rounded hover:bg-surface-container-low transition-colors shadow-sm"
+            >
+              <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" className="w-5 h-5" />
               <span className="text-sm font-medium text-on-surface">LinkedIn</span>
             </button>
           </div>

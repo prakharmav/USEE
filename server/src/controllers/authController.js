@@ -2,6 +2,10 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import { sendNotification, welcomeEmail } from '../services/emailService.js';
+import { OAuth2Client } from 'google-auth-library';
+import axios from 'axios';
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -104,6 +108,106 @@ export const getMe = async (req, res, next) => {
       data: { user },
     });
   } catch (error) {
+    next(error);
+  }
+};
+
+export const googleLogin = async (req, res, next) => {
+  try {
+    const { credential } = req.body;
+    
+    if (!credential) {
+      return res.status(400).json({ status: 'error', message: 'Token is required' });
+    }
+
+    let email, name;
+
+    try {
+      if (!process.env.GOOGLE_CLIENT_ID) {
+        // Fallback for demo without env variables (just decode the token without strict verification)
+        const decoded = jwt.decode(credential);
+        if (!decoded || !decoded.email) throw new Error("Invalid token payload");
+        email = decoded.email;
+        name = decoded.name;
+      } else {
+        const ticket = await googleClient.verifyIdToken({
+          idToken: credential,
+          audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        email = payload.email;
+        name = payload.name;
+      }
+    } catch (err) {
+      return res.status(401).json({ status: 'error', message: 'Invalid Google token' });
+    }
+
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({ name, email, password: 'oauthUser' });
+    }
+
+    const token = signToken(user._id);
+    res.status(200).json({
+      status: 'success',
+      token,
+      data: { user: { id: user._id, name: user.name, email: user.email, journeyStage: user.journeyStage } },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const linkedinLogin = async (req, res, next) => {
+  try {
+    const { code } = req.body;
+    
+    if (!code) {
+      return res.status(400).json({ status: 'error', message: 'Code is required' });
+    }
+
+    if (!process.env.LINKEDIN_CLIENT_ID || !process.env.LINKEDIN_CLIENT_SECRET) {
+      // Dummy response for development if env variables are not present.
+      // Usually, you would prompt an error or handle a mock.
+      return res.status(500).json({ status: 'error', message: 'LinkedIn credentials not configured on the server.' });
+    }
+
+    // 1. Swap authorization code for access token
+    const tokenResponse = await axios.post('https://www.linkedin.com/oauth/v2/accessToken', null, {
+      params: {
+        grant_type: 'authorization_code',
+        code,
+        client_id: process.env.LINKEDIN_CLIENT_ID,
+        client_secret: process.env.LINKEDIN_CLIENT_SECRET,
+        redirect_uri: process.env.LINKEDIN_REDIRECT_URI || 'http://localhost:5173/auth/linkedin/callback'
+      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
+
+    const accessToken = tokenResponse.data.access_token;
+
+    // 2. Fetch user profile and email
+    const profileResponse = await axios.get('https://api.linkedin.com/v2/userinfo', {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    });
+
+    const { email, name } = profileResponse.data;
+
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({ name, email, password: 'oauthUser' });
+    }
+
+    const token = signToken(user._id);
+    res.status(200).json({
+      status: 'success',
+      token,
+      data: { user: { id: user._id, name: user.name, email: user.email, journeyStage: user.journeyStage } },
+    });
+  } catch (error) {
+    if (error.response && error.response.data) {
+      console.error('LinkedIn Auth Error:', error.response.data);
+    }
     next(error);
   }
 };
