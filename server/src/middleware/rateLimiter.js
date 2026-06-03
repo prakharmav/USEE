@@ -16,12 +16,12 @@ export const generalLimiter = rateLimit({
 });
 
 /**
- * Stricter limiter for auth routes: 5 requests per 15 minutes.
+ * Stricter limiter for auth routes: 30 requests per 15 minutes.
  * Apply per-router: app.use('/api/auth', authLimiter, authRouter)
  */
 export const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: 30,
   standardHeaders: true,
   legacyHeaders: false,
   message: {

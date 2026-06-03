@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useGamificationStore } from '../store/gamificationStore';
@@ -8,7 +8,7 @@ import { useLinkedIn } from 'react-linkedin-login-oauth2';
 const AuthForm = ({ type }) => {
   const isLogin = type === 'login';
   const navigate = useNavigate();
-  const { apiLogin, apiRegister, apiGoogleLogin, apiLinkedinLogin, loading, error } = useAuthStore();
+  const { apiLogin, apiRegister, apiGoogleLogin, apiLinkedinLogin, loading, error, isAuthenticated, clearError } = useAuthStore();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +28,18 @@ const AuthForm = ({ type }) => {
       console.error('LinkedIn Login Failed:', error);
     },
   });
+
+  // Clear any active errors when type/tab changes
+  useEffect(() => {
+    clearError();
+  }, [type, clearError]);
+
+  // Redirect to dashboard if user is already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -129,7 +141,7 @@ const AuthForm = ({ type }) => {
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-lg">person</span>
                   <input 
-                    className="w-full pl-12 pr-4 py-3.5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline" 
+                    className="w-full pl-12 pr-4 py-3.5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline outline-none" 
                     placeholder="Future Voyager" 
                     type="text"
                     value={name}
@@ -144,7 +156,7 @@ const AuthForm = ({ type }) => {
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-lg">alternate_email</span>
                 <input 
-                  className="w-full pl-12 pr-4 py-3.5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline" 
+                  className="w-full pl-12 pr-4 py-3.5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline outline-none" 
                   placeholder="voyager@eduvion.ai" 
                   type="email"
                   value={email}
@@ -161,7 +173,7 @@ const AuthForm = ({ type }) => {
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-lg">lock</span>
                 <input 
-                  className="w-full pl-12 pr-12 py-3.5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline" 
+                  className="w-full pl-12 pr-12 py-3.5 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline outline-none" 
                   placeholder="••••••••" 
                   type={showPassword ? "text" : "password"}
                   value={password}
@@ -203,7 +215,7 @@ const AuthForm = ({ type }) => {
           </div>
           {/* Social Logins */}
           <div className="grid grid-cols-2 gap-4 pb-2">
-            <div className="flex items-center justify-center h-12 overflow-hidden rounded-xl">
+            <div className="flex items-center justify-center h-[40px] overflow-hidden rounded-md">
               <GoogleLogin
                 onSuccess={async (credentialResponse) => {
                   const success = await apiGoogleLogin(credentialResponse.credential);
@@ -217,10 +229,10 @@ const AuthForm = ({ type }) => {
             <button 
               onClick={linkedInLogin}
               type="button"
-              className="flex items-center justify-center gap-3 h-[40px] px-4 bg-surface-container-lowest border border-outline-variant/20 rounded hover:bg-surface-container-low transition-colors shadow-sm"
+              className="flex items-center justify-center gap-3 h-[40px] px-4 bg-surface-container-lowest border border-outline-variant/20 rounded-md hover:bg-surface-container-low transition-colors shadow-sm cursor-pointer"
             >
               <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" className="w-5 h-5" />
-              <span className="text-sm font-medium text-on-surface">LinkedIn</span>
+              <span className="text-sm font-medium text-on-surface font-headline">LinkedIn</span>
             </button>
           </div>
           <p className="text-center text-[10px] text-outline mt-12 px-8 uppercase tracking-widest leading-relaxed">

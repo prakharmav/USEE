@@ -144,7 +144,8 @@ export const googleLogin = async (req, res, next) => {
 
     let user = await User.findOne({ email });
     if (!user) {
-      user = await User.create({ name, email, password: 'oauthUser' });
+      const dummyPassword = await bcrypt.hash(Math.random().toString(36).slice(-8), 12);
+      user = await User.create({ name, email, password: dummyPassword });
     }
 
     const token = signToken(user._id);
@@ -195,7 +196,8 @@ export const linkedinLogin = async (req, res, next) => {
 
     let user = await User.findOne({ email });
     if (!user) {
-      user = await User.create({ name, email, password: 'oauthUser' });
+      const dummyPassword = await bcrypt.hash(Math.random().toString(36).slice(-8), 12);
+      user = await User.create({ name, email, password: dummyPassword });
     }
 
     const token = signToken(user._id);

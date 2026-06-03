@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import GlobalLoader from './components/GlobalLoader';
 import { useAuthStore } from './store/authStore';
+import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 
 // Lazy Loaded Pages to reduce initial main.js bundle parsing < 500kb natively
 const Home = lazy(() => import('./pages/Home'));
@@ -25,7 +26,10 @@ const EligibilityResult = lazy(() => import('./pages/EligibilityResult'));
 const EssayHelper = lazy(() => import('./pages/EssayHelper'));
 
 function App() {
-  const checkAuth = useAuthStore((state) => state.checkAuth);
+  const { checkAuth, checkingAuth } = useAuthStore((state) => ({
+    checkAuth: state.checkAuth,
+    checkingAuth: state.checkingAuth
+  }));
 
   useEffect(() => {
     checkAuth();
@@ -36,6 +40,10 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [checkAuth]);
+
+  if (checkingAuth) {
+    return <GlobalLoader />;
+  }
 
   return (
     <BrowserRouter>
@@ -54,6 +62,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<AuthForm type="login" />} />
               <Route path="/register" element={<AuthForm type="register" />} />
+              <Route path="/auth/linkedin/callback" element={<LinkedInCallback />} />
 
               {/* Protected Routes */}
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

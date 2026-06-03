@@ -6,19 +6,22 @@ export const useAuthStore = create((set, get) => ({
   user: null,
   token: localStorage.getItem('token') || null,
   isAuthenticated: !!localStorage.getItem('token'),
+  checkingAuth: !!localStorage.getItem('token'),
   loading: false,
   error: null,
 
   // Synchronous local state setters
   setAuth: (userData, token) => {
     localStorage.setItem('token', token);
-    set({ user: userData, token, isAuthenticated: true, loading: false, error: null });
+    set({ user: userData, token, isAuthenticated: true, loading: false, error: null, checkingAuth: false });
   },
 
   clearAuth: () => {
     localStorage.removeItem('token');
-    set({ user: null, token: null, isAuthenticated: false, loading: false, error: null });
+    set({ user: null, token: null, isAuthenticated: false, loading: false, error: null, checkingAuth: false });
   },
+
+  clearError: () => set({ error: null }),
 
   // Async API actions
   apiLogin: async (email, password) => {
@@ -32,6 +35,7 @@ export const useAuthStore = create((set, get) => ({
       
       if (result.status === 'success') {
         get().setAuth(result.data.user, result.token);
+        toast.success('Logged in successfully!');
         return true;
       } else {
         set({ error: result.message, loading: false });
@@ -125,20 +129,23 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     const token = localStorage.getItem('token');
-    if (!token) return;
+    if (!token) {
+      set({ checkingAuth: false });
+      return;
+    }
 
-    set({ loading: true });
+    set({ loading: true, checkingAuth: true });
     try {
       const response = await apiFetch('/api/auth/me');
       const result = response.data;
 
       if (result.status === 'success') {
-        set({ user: result.data.user, isAuthenticated: true, loading: false });
+        set({ user: result.data.user, isAuthenticated: true, loading: false, checkingAuth: false });
       } else {
         get().clearAuth();
       }
     } catch (err) {
-      set({ loading: false });
+      set({ loading: false, checkingAuth: false });
     }
   },
 
